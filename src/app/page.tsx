@@ -122,7 +122,7 @@ export default function Home() {
       border: "border-violet-500/30"
     },
     {
-      title: "Anh Hồng Food",
+      title: "Ánh Hồng Food",
       type: "Food E-commerce Website",
       link: "https://anhhongfood.com/",
       tech: ["PHP", "WordPress", "WooCommerce", "AJAX"],
@@ -134,20 +134,6 @@ export default function Home() {
       ],
       color: "from-rose-500/20 to-orange-500/20",
       border: "border-rose-500/30"
-    },
-    {
-      title: "IKN",
-      type: "Corporate Website",
-      link: "https://ikn.vn/",
-      tech: ["PHP", "WordPress", "Custom Theme", "ACF"],
-      description: "Website doanh nghiệp chuyên nghiệp với hệ thống quản trị nội dung được thiết kế riêng.",
-      highlights: [
-        "Xây dựng hệ thống CMS tùy chỉnh theo nhu cầu doanh nghiệp",
-        "Phát triển theme đạt chuẩn từ thiết kế Figma",
-        "Tối ưu hóa hiệu suất và khả năng mở rộng"
-      ],
-      color: "from-slate-500/20 to-gray-500/20",
-      border: "border-slate-500/30"
     },
     {
       title: "Sứ Long Hậu",
