@@ -123,7 +123,7 @@ export default function Home() {
     },
     {
       title: "Ánh Hồng Food",
-      type: "Food E-commerce Website",
+      type: "Corporate Website",
       link: "https://anhhongfood.com/",
       tech: ["PHP", "WordPress", "WooCommerce", "AJAX"],
       description: "Website thương mại điện tử ngành thực phẩm với giao diện trực quan và quy trình đặt hàng tối ưu.",
