@@ -347,7 +347,6 @@ export default function Home() {
 
               <div className="md:w-[45%] pl-6 md:pl-12 ml-6 md:ml-0">
                 <div className="p-6 bg-white/[0.02] border border-white/5 rounded-2xl hover:bg-white/[0.04] transition-colors">
-                  <Briefcase className="w-6 h-6 text-slate-500 mb-4" />
                   <ul className="space-y-3 text-slate-300 text-sm">
                     <li className="flex gap-2"><div className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 shrink-0" /> Chuyển đổi chính xác từ Figma sang giao diện responsive hoàn chỉnh.</li>
                     <li className="flex gap-2"><div className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 shrink-0" /> Xây dựng & phát triển các plugin tùy chỉnh đáp ứng nhu cầu doanh nghiệp.</li>
