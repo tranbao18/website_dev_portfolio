@@ -316,6 +316,13 @@ export default function Home() {
               </motion.div>
             ))}
           </div>
+
+          <motion.div variants={itemVariant} className="mt-14 flex justify-center">
+            <a href="/projects" className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-blue-600/10 border border-blue-500/20 hover:bg-blue-600/20 hover:border-blue-500/40 text-blue-300 font-medium transition-all group shadow-[0_0_20px_rgba(37,99,235,0.1)] hover:shadow-[0_0_30px_rgba(37,99,235,0.2)]">
+              Xem Tất Cả 81 Dự Án
+              <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </a>
+          </motion.div>
         </motion.section>
 
         {/* WORK EXPERIENCE */}
