@@ -34,7 +34,7 @@ export default function ProjectsPage() {
     return projects.filter((p) => p.filterCategory === activeFilter);
   }, [activeFilter]);
 
-  const staggerContainer = {
+  const staggerContainer: any = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,

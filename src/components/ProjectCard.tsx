@@ -50,7 +50,7 @@ function getInitials(name: string): string {
     .toUpperCase();
 }
 
-const itemVariant = {
+const itemVariant: any = {
   hidden: { opacity: 0, y: 30, scale: 0.95 },
   visible: {
     opacity: 1,
