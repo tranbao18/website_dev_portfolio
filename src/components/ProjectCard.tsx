@@ -73,18 +73,6 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
           {project.description}
         </p>
 
-        {/* Tags */}
-        <div className="flex flex-wrap gap-2 mb-6">
-          {project.tags.slice(0, 4).map((tag, idx) => (
-            <span
-              key={idx}
-              className="px-3 py-1 bg-white text-slate-600 text-[11px] font-medium rounded-full border border-slate-200"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-
         {/* Action Button */}
         <a
           href={siteUrl}
