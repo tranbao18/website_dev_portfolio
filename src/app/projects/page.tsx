@@ -190,7 +190,7 @@ export default function ProjectsPage() {
           >
             {paginatedProjects.map((project, index) => (
               <ProjectCard
-                key={`${project.id || project.domain}-${project.year}`}
+                key={`${ project.domain}-${project.year}`}
                 project={project}
                 index={index}
               />
