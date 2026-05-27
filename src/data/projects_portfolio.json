@@ -1,0 +1,714 @@
+[
+  {
+    "year": 2024,
+    "category": "Corporate",
+    "project_name": "AGRIEX COMPANY LIMITED",
+    "domain": "agx.vn",
+    "description": "Công ty chuyên sản xuất và cung cấp nông sản, rau củ quả tươi và đông lạnh theo tiêu chuẩn Nhật Bản.",
+    "img": "/agx.jpg"
+  },
+  {
+    "year": 2025,
+    "category": "Consumer Goods",
+    "project_name": "Nước Tinh Khiết Aquavie",
+    "domain": "aquavie.vn",
+    "description": "Thương hiệu chuyên sản xuất và phân phối các sản phẩm nước uống tinh khiết đóng chai, đóng bình.",
+    "img": "/aquavie.jpg"
+  },
+   {
+    "year": 2025,
+    "category": "Health & Clinic",
+    "project_name": "Clinic System Manager",
+    "domain": "clinic-system-manager.vercel.app",
+    "description": "Hệ thống quản lý phòng khám toàn diện với đầy đủ tính năng đặt lịch, thanh toán và báo cáo.",
+    "img":"logo_phong_kham.png",
+    "flag":true
+  },
+  {
+    "year": 2024,
+    "category": "Corporate",
+    "project_name": "Công ty TNHH Chứng nhận Quốc tế ARES Việt Nam",
+    "domain": "aresvietnam.vn",
+    "description": "Đơn vị cung cấp dịch vụ tư vấn, đào tạo và cấp chứng nhận các tiêu chuẩn quốc tế (ISO, ESG) cho doanh nghiệp.",
+    "img": "/ares.png"
+  },
+  {
+    "year": 2025,
+    "category": "Travel & Tourism",
+    "project_name": "ATN Travel - Land Tour Du Lịch Nga",
+    "domain": "atntravel.ru",
+    "description": "Công ty lữ hành chuyên thiết kế và điều hành các tour du lịch trọn gói khám phá nước Nga dành cho du khách Việt Nam.",
+    "img": "atntravel.jpg"
+  },
+  {
+    "year": 2024,
+    "category": "Corporate",
+    "project_name": "ATS Water Technology",
+    "domain": "www.atswatertechnology.com",
+    "description": "Đơn vị chuyên tư vấn, thiết kế, cung cấp giải pháp và thiết bị xử lý nước công nghiệp/dân dụng.",
+    "img":"ats.jpg"
+  },
+  {
+    "year": 2024,
+    "category": "Agriculture",
+    "project_name": "BMI Farm",
+    "domain": "bmifarm.com",
+    "description": "Thương hiệu nông trại chuyên sản xuất, chế biến và phân phối các sản phẩm cao cấp từ cacao, sô-cô-la và hạt dinh dưỡng.",
+    "img":"bmifarm.jpg"
+  },
+  {
+    "year": 2025,
+    "category": "Corporate",
+    "project_name": "Dabin Ensol",
+    "domain": "dabinensol.com",
+    "description": "Công ty cung cấp các giải pháp năng lượng mặt trời toàn diện (điện áp mái, quản lý năng lượng EMS) cho doanh nghiệp.",
+    "img":"dabinensol.jpg"
+  },
+  {
+    "year": 2024,
+    "category": "Travel & Tourism",
+    "project_name": "Du Lịch Sài Gòn",
+    "domain": "dulichsaigon.edu.vn",
+    "description": "Cao đẳng Du lịch Sài Gòn là Trường đào tạo chuyên ngành Du lịch tại TP. HCM.",
+    "img":"dulichsaigon.png"
+  },
+  {
+    "year": 2023,
+    "category": "Corporate",
+    "project_name": "Công ty TNHH Duo Bao Xun",
+    "domain": "duobaoxun.vn",
+    "description": "DUOBAOXUN là công ty công nghệ đa ngành nghề."
+  },
+  {
+    "year": 2025,
+    "category": "Healthcare & Medical",
+    "project_name": "Viện Dưỡng Lão Bình Mỹ",
+    "domain": "duonglaobinhmy.com",
+    "description": "Hệ thống dưỡng lão cao cấp tại TP.HCM, cung cấp dịch vụ chăm sóc sức khỏe và không gian an dưỡng y tế cho người cao tuổi.",
+    "img":"vienduonglao.jpg"
+  },
+  {
+    "year": 2025,
+    "category": "F&B",
+    "project_name": "Fudo Vietnam",
+    "domain": "fudovietnam.com",
+    "description": "Thương hiệu chuyên cung cấp các sản phẩm khăn giấy tre tự nhiên cao cấp, thân thiện với môi trường và dịch vụ logistics.",
+    "img":"fudovietnam.avif",
+     "flag":true
+  },
+  {
+    "year": 2024,
+    "category": "Services",
+    "project_name": "Khử trùng VFC",
+    "domain": "fumigation.vn",
+    "description": "Trang web của Công ty Cổ phần Khử trùng Việt Nam, chuyên cung cấp dịch vụ khử trùng hàng hóa, nông sản và kiểm soát dịch hại.",
+    "img":"vfc.png"
+  },
+  {
+    "year": 2024,
+    "category": "Real Estate & Furniture",
+    "project_name": "Gia Bảo Luxhome",
+    "domain": "giabaoluxhome.com",
+    "description": "Đơn vị phân phối các thiết bị điện máy, điện gia dụng thông minh và cao cấp (máy giặt, máy lọc không khí, thiết bị nhà bếp...).",
+    "img":"giabaoluxhome.png"
+  },
+  {
+    "year": 2023,
+    "category": "Real Estate & Furniture",
+    "project_name": "Grand Home Group",
+    "domain": "grandhomegroup.com.vn",
+    "description": "Tập đoàn chuyên sản xuất, kinh doanh và phân phối các loại gạch ốp lát, vật liệu xây dựng cho các công trình.",
+    "img":"grandhome.png"
+  },
+  {
+    "year": 2025,
+    "category": "Corporate",
+    "project_name": "HanoiLink",
+    "domain": "hanoilink.vn",
+    "description": "Trung tâm đào tạo tiếng Nhật, tư vấn du học và cung ứng/xuất khẩu lao động uy tín (chủ yếu thị trường Nhật Bản).",
+    "img":"hanoilink.png"
+  },
+  {
+    "year": 2024,
+    "category": "Retail",
+    "project_name": "Happy Phone",
+    "domain": "happyphone.vn",
+    "description": "Hệ thống cửa hàng bán lẻ điện thoại, máy tính bảng, phụ kiện công nghệ và đồ điện gia dụng chính hãng.",
+    "img":"Happy-Phone.svg"
+  },
+  {
+    "year": 2024,
+    "category": "Corporate",
+    "project_name": "HGDELTA",
+    "domain": "hgdelta.com",
+    "description": "Trang thông tin doanh nghiệp."
+  },
+  {
+    "year": 2023,
+    "category": "Personal/Portfolio",
+    "project_name": "Hoàng Nguyên Solar",
+    "domain": "hoangnguyensolar.vn",
+    "description": "Công ty chuyên phân phối, lắp đặt các giải pháp máy nước nóng năng lượng mặt trời, bơm nhiệt và hệ thống điện mặt trời.",
+    "img": "hoangnguyensolar.jpg"
+  },
+  {
+    "year": 2025,
+    "category": "Healthcare & Medical",
+    "project_name": "iCare Partner",
+    "domain": "icare.vn",
+    "description": "Hệ thống quản lý và vận hành chuỗi phòng khám chuyên khoa chất lượng cao (nổi bật với chuyên khoa phụ sản).",
+    "img": "icare.jpg"
+  },
+  {
+    "year": 2024,
+    "category": "Corporate",
+    "project_name": "IGcons",
+    "domain": "igcons.vn",
+    "description": "Đơn vị chuyên cung cấp dịch vụ thiết kế kiến trúc và thi công xây dựng nhà ở dân dụng trọn gói.",
+    "img": "igcons.jpeg"
+    
+  },
+  {
+    "year": 2024,
+    "category": "Travel & Tourism",
+    "project_name": "iGoTour",
+    "domain": "igotour.vn",
+    "description": "Công ty dịch vụ lữ hành chuyên tổ chức và điều hành các tour du lịch trọn gói trong và ngoài nước.",
+    "img": "igotour.webp"
+  },
+  {
+    "year": 2025,
+    "category": "Corporate",
+    "project_name": "IKN",
+    "domain": "ikn.vn",
+    "description": "Showroom kinh doanh các dòng xe ô tô lướt uy tín, xe sang và cung cấp dịch vụ tư vấn chọn biển số xe phong thủy.",
+    "img":"ikn.jpg"
+  },
+  {
+    "year": 2024,
+    "category": "IT Services",
+    "project_name": "JVB Việt Nam",
+    "domain": "jvb-corp.com",
+    "description": "Công ty Công nghệ Thông tin chuyên gia công phần mềm (Offshore), phát triển Web/App và tư vấn giải pháp CNTT.",
+    "img":"jvbcorp.png"
+  },
+  {
+    "year": 2024,
+    "category": "Industrial",
+    "project_name": "Khí nén Á Châu",
+    "domain": "khinenachau.com",
+    "description": "Đơn vị chuyên phân phối, cung cấp máy nén khí, phụ tùng và tư vấn các giải pháp về hệ thống khí nén công nghiệp.",
+    "img":"khinenachau.png"
+  },
+  {
+    "year": 2024,
+    "category": "Corporate",
+    "project_name": "Kim Tâm Cát",
+    "domain": "kimtamcat.com",
+    "description": "Thương hiệu chuyên kinh doanh và phân phối các sản phẩm chăm sóc sức khỏe cao cấp (như yến sào, đông trùng hạ thảo, nhân sâm) và set quà tặng doanh nghiệp.",
+    "img":"kimtamcat.svg"
+  },
+  {
+    "year": 2023,
+    "category": "Corporate",
+    "project_name": "Knight",
+    "domain": "knight.com.vn",
+    "description": "Công ty chuyên cung cấp các dịch vụ logistics toàn diện, bao gồm vận tải hàng hóa quốc tế, khai báo thủ tục hải quan và giải pháp chuỗi cung ứng.",
+    "img":"knight.webp"
+  },
+  {
+    "year": 2025,
+    "category": "Corporate",
+    "project_name": "La Pasion",
+    "domain": "lapassion.vn",
+    "description": "Đơn vị chuyên phân phối các dòng sản phẩm đồ uống cao cấp, rượu vang nhập khẩu chính hãng, phụ kiện đi kèm và các giải pháp quà tặng tinh tế.",
+    "img":"lapasion.png"
+  },
+  {
+    "year": 2024,
+    "category": "Corporate",
+    "project_name": "Long Trường",
+    "domain": "longtruong.vn",
+    "description": "Đơn vị hoạt động trong lĩnh vực cung cấp vật liệu xây dựng, thi công hạ tầng, cơ khí hoặc các dịch vụ liên quan đến xây lắp và bất động sản.",
+    "img":"longtruong.svg"
+  },
+  {
+    "year": 2023,
+    "category": "Healthcare & Medical",
+    "project_name": "Mắt Quốc Tế",
+    "domain": "matquocte.vn",
+    "description": "Hệ thống y tế chuyên khoa cung cấp các dịch vụ khám, chẩn đoán, điều trị bệnh lý về mắt và phẫu thuật khúc xạ tiêu chuẩn quốc tế.",
+    "img":"matquocte.png"
+  },
+  {
+    "year": 2024,
+    "category": "Industrial",
+    "project_name": "Megasun",
+    "domain": "megasun.com.vn",
+    "description": "Thương hiệu uy tín chuyên sản xuất và cung cấp các thiết bị năng lượng, nổi bật với máy nước nóng năng lượng mặt trời, bơm nhiệt (heat pump) và bồn bảo ôn.",
+    "img":"megasun.png"
+  },
+  {
+    "year": 2023,
+    "category": "Industrial",
+    "project_name": "Mida Mold",
+    "domain": "midamold.com",
+    "description": "Công ty chuyên nghiệp trong lĩnh vực thiết kế, chế tạo khuôn mẫu chính xác và ép phun các linh kiện nhựa kỹ thuật cho ngành y tế, điện tử, công nghiệp.",
+    "img":"midamold.png"
+  },
+  {
+    "year": 2024,
+    "category": "Travel & Tourism",
+    "project_name": "Mr. Biu Ha Giang Loop",
+    "domain": "mrbiuhagiangloop.com",
+    "description": "Đơn vị lữ hành địa phương chuyên tổ chức các tour du lịch bằng xe máy khám phá vòng lặp Hà Giang (Ha Giang Loop), cung cấp hướng dẫn viên và dịch vụ thuê xe.",
+    "img":"hagiangloop.png"
+  },
+  {
+    "year": 2025,
+    "category": "E-commerce & Import",
+    "project_name": "Mua Hàng Trung Việt",
+    "domain": "muahangtrungviet.vn",
+    "description": "Dịch vụ chuyên hỗ trợ đặt hàng (order) trên các nền tảng thương mại điện tử Trung Quốc (Taobao, 1688, Tmall...) và vận chuyển hàng hóa từ Trung Quốc về Việt Nam.",
+    "img":"muahangtrungviet.svg"
+  },
+  {
+    "year": 2023,
+    "category": "Healthcare & Medical",
+    "project_name": "Dược Phẩm Nadyphar",
+    "domain": "nadyphar.com.vn",
+    "description": "Trang web của Công ty Cổ phần Dược phẩm 2/9 (Nadyphar), đơn vị uy tín lâu năm tại Việt Nam chuyên nghiên cứu, sản xuất, kinh doanh và phân phối các sản phẩm dược phẩm, dược mỹ phẩm và vật tư y tế.",
+    "img":"nadyphar.svg"
+  },
+  {
+    "year": 2025,
+    "category": "E-commerce & Import",
+    "project_name": "Nhập hàng Hòa Bình",
+    "domain": "nhaphanghoabinh.com",
+    "description": "Công ty chuyên cung cấp các giải pháp logistics, dịch vụ mua hộ, thanh toán hộ và vận chuyển hàng hóa chuyên tuyến Trung Quốc - Việt Nam.",
+    "img":"nhaphanghoabinh.png"
+  },
+  {
+    "year": 2024,
+    "category": "Personal/Portfolio",
+    "project_name": "Nguyễn Đức Furniture",
+    "domain": "nguyenducfurniture.com",
+    "description": "Đơn vị chuyên thiết kế, sản xuất, thi công và cung cấp các sản phẩm nội thất đồ gỗ cho gia đình, văn phòng và dự án.",
+    "img":"nguyenduc.png"
+  },
+  {
+    "year": 2023,
+    "category": "Industrial",
+    "project_name": "Nhật Nam Tex",
+    "domain": "nhatnamtex.com",
+    "description": "Công ty hoạt động trong lĩnh vực dệt may, chuyên sản xuất, gia công và cung cấp các loại vải, sợi cùng phụ liệu ngành may mặc.",
+    "img":"nhatnamtex.svg"
+  },
+  {
+    "year": 2024,
+    "category": "Corporate",
+    "project_name": "Nhật Trường Minh",
+    "domain": "nhattruongminh.com",
+    "description": "Doanh nghiệp chuyên sản xuất và phân phối các sản phẩm vật tư công nghiệp, vật liệu xây dựng hoặc thiết bị phục vụ công trình.",
+    "img":"nhattruongminh.png"
+  },
+  {
+    "year": 2025,
+    "category": "Corporate",
+    "project_name": "Papiu Resort",
+    "domain": "papiu.vn",
+    "description": "Khu nghỉ dưỡng (resort) sinh thái cao cấp và độc đáo nằm trên đỉnh núi tại Hà Giang, mang đến không gian nghỉ dưỡng riêng tư, hòa mình vào thiên nhiên.",
+    "img":"papiu.webp"
+  },
+  {
+    "year": 2024,
+    "category": "Services",
+    "project_name": "Pestman",
+    "domain": "pestman.vn",
+    "description": "Công ty chuyên cung cấp các giải pháp và dịch vụ kiểm soát côn trùng, diệt mối và phòng chống dịch hại cho các hộ gia đình, tòa nhà và nhà máy.",
+    "img":"vfc.png"
+  },
+  {
+    "year": 2023,
+    "category": "Corporate",
+    "project_name": "PML Global",
+    "domain": "pmlglobal.vn",
+    "description": "Đơn vị hoạt động trong lĩnh vực logistics, chuyên cung cấp các dịch vụ giao nhận vận tải quốc tế, xuất nhập khẩu và giải pháp chuỗi cung ứng.",
+    "img":"pmlglobal.png"
+  },
+  {
+    "year": 2024,
+    "category": "IT Services",
+    "project_name": "Pontech",
+    "domain": "pontech.vn",
+    "description": "Công ty chuyên hoạt động trong lĩnh vực công nghệ, cung cấp các giải pháp phần mềm, tự động hóa hoặc thiết bị công nghệ thông tin cho doanh nghiệp.",
+    "img":"pontech.svg"
+  },
+  {
+    "year": 2025,
+    "category": "Corporate",
+    "project_name": "PSD",
+    "domain": "psd.com.vn",
+    "description": "Công ty Cổ phần Dịch vụ Phân phối Tổng hợp Dầu khí (PSD), nhà phân phối chính hãng các thiết bị công nghệ, điện tử, máy tính và điện thoại di động hàng đầu tại Việt Nam.",
+    "img":"psd.svg"
+  },
+  {
+    "year": 2024,
+    "category": "Education",
+    "project_name": "PTIT E",
+    "domain": "ptitemuahang.com",
+    "description": "Đơn vị chuyên cung cấp dịch vụ đặt hàng (order) hộ, thanh toán và vận chuyển hàng hóa từ các nền tảng thương mại điện tử Trung Quốc về Việt Nam.",
+    "img":"ptite.svg"
+  },
+  {
+    "year": 2023,
+    "category": "Information Portal",
+    "project_name": "Quảng Bình VN",
+    "domain": "quangbinhtravel.vn",
+    "description": "Công ty du lịch lữ hành chuyên thiết kế và tổ chức các tour khám phá thiên nhiên, mạo hiểm và tham quan hệ thống hang động tại Phong Nha - Kẻ Bàng (Quảng Bình).",
+    "img":"quangbinhtravel.svg",
+     "flag":true
+  },
+  {
+    "year": 2024,
+    "category": "Fashion",
+    "project_name": "Quan Uniform",
+    "domain": "quanuniform.com",
+    "description": "Dịch vụ may đồng phục."
+  },
+  {
+    "year": 2023,
+    "category": "E-commerce",
+    "project_name": "Shop Acc Trifame",
+    "domain": "shopacctrifame.com",
+    "description": "Cửa hàng bán tài khoản game trực tuyến."
+  },
+  {
+    "year": 2024,
+    "category": "Healthcare & Medical",
+    "project_name": "Sinh Đông Y",
+    "domain": "sinhdongy.com",
+    "description": "Cơ sở y tế/thương hiệu chuyên cung cấp các dịch vụ tư vấn, khám chữa bệnh và các sản phẩm chăm sóc sức khỏe có nguồn gốc từ y học cổ truyền (Đông y).",
+    "img":"sinhdongy.webp"
+  },
+  {
+    "year": 2024,
+    "category": "Agriculture",
+    "project_name": "Snewrice",
+    "domain": "snewrice.com.vn",
+    "description": "Doanh nghiệp chuyên sản xuất, chế biến và phân phối các sản phẩm gạo sạch, chất lượng cao đáp ứng nhu cầu tiêu dùng trong nước và xuất khẩu.",
+    "img":"snewrice.svg"
+  },
+  {
+    "year": 2024,
+    "category": "Real Estate",
+    "project_name": "Sunshine Group",
+    "domain": "sunshinegr.vn",
+    "description": "Trang thông tin của Tập đoàn Sunshine, một trong những nhà phát triển bất động sản lớn chuyên về các dự án căn hộ cao cấp, biệt thự thông minh (Smart Home) gắn liền với công nghệ 4.0.",
+    "img":"sunshine.jpg"
+  },
+  {
+    "year": 2023,
+    "category": "Real Estate & Furniture",
+    "project_name": "Thế Giới Biệt Thự",
+    "domain": "thegioibietthu.vn",
+    "description": "Nền tảng giao dịch, tư vấn và môi giới bất động sản chuyên tập trung vào phân khúc cao cấp như biệt thự, nhà phố thương mại và bất động sản nghỉ dưỡng.",
+    "img":"thegioibietthu.svg"
+  },
+  {
+    "year": 2025,
+    "category": "Corporate",
+    "project_name": "THT Việt Nam",
+    "domain": "thtvietnam.com.vn",
+    "description": "Tập đoàn/Doanh nghiệp hoạt động mạnh trong lĩnh vực sản xuất, nhập khẩu và phân phối các sản phẩm tiêu dùng, nổi bật là các dòng hóa phẩm, chất tẩy rửa và chăm sóc gia đình.",
+    "img":"thtvietnam.png"
+  },
+  {
+    "year": 2023,
+    "category": "Travel & Tourism",
+    "project_name": "Nice Golf Tour",
+    "domain": "nicegolftour.com",
+    "description": "Đơn vị lữ hành chuyên thiết kế, tư vấn và tổ chức các tour du lịch kết hợp chơi golf (golf tour) cao cấp dành cho các golfer trong và ngoài nước.",
+    "img":"nicegolf.png",
+     "flag":true
+  },
+  {
+    "year": 2025,
+    "category": "Education",
+    "project_name": "Trường Việt Anh",
+    "domain": "truongvietanh.com",
+    "description": "Hệ thống trường phổ thông liên cấp (từ Mầm non đến Trung học phổ thông) nổi bật với chương trình đào tạo tiếng Anh chuyên sâu và định hướng giáo dục kỹ năng, học sinh giỏi.",
+    "img":"truongvietanh.webp"
+  },
+  {
+    "year": 2025,
+    "category": "Corporate",
+    "project_name": "Unistar",
+    "domain": "unistar.vn",
+    "description": "Tổ chức giáo dục chuyên cung cấp các chương trình đào tạo ngoại ngữ, tiếng Anh học thuật và dịch vụ tư vấn du học quốc tế.",
+    "img":"unistar.svg"
+  },
+  {
+    "year": 2023,
+    "category": "Consumer Goods",
+    "project_name": "Viet Baby Fair",
+    "domain": "vietbabyfair.com.vn",
+    "description": "Trang web chính thức của Triển lãm Quốc tế chuyên ngành Sản phẩm và Dịch vụ cho Mẹ, Trẻ sơ sinh và Trẻ em lớn nhất tại Việt Nam (Vietbaby Fair).",
+    "img":"vietbaby.png"
+  },
+  {
+    "year": 2024,
+    "category": "Corporate",
+    "project_name": "Viet Consumer",
+    "domain": "vietconsumer.com",
+    "description": "Kênh thông tin và nền tảng chuyên cung cấp các đánh giá, nghiên cứu thị trường, tin tức và phân tích về xu hướng tiêu dùng, ngành bán lẻ tại Việt Nam.",
+    "img":"vietconsumer.png"
+  },
+  {
+    "year": 2025,
+    "category": "Education",
+    "project_name": "Viet Edu Fair",
+    "domain": "vietedufair.com.vn",
+    "description": "Nền tảng thông tin của Triển lãm Giáo dục Quốc tế tại Việt Nam, sự kiện thường niên nhằm kết nối học sinh, sinh viên với các trường đại học và tổ chức giáo dục trên toàn cầu.",
+    "img":"vietedu.png"
+  },
+  {
+    "year": 2024,
+    "category": "Corporate",
+    "project_name": "Viet Franchise",
+    "domain": "vietfranchise.vn",
+    "description": "Cổng thông tin và nền tảng chuyên tư vấn, kết nối giao thương trong lĩnh vực nhượng quyền thương mại (franchise) dành cho các doanh nghiệp và nhà đầu tư.",
+    "img":"vietfranchise.png"
+  },
+  {
+    "year": 2025,
+    "category": "Corporate",
+    "project_name": "VVT",
+    "domain": "vvt.vn",
+    "description": "Website giới thiệu công ty.",
+    "img":"viettin.svg"
+  },
+  {
+    "year": 2024,
+    "category": "Real Estate & Furniture",
+    "project_name": "Wall Design",
+    "domain": "walldesign.vn",
+    "description": "Dịch vụ thiết kế và thi công giấy dán tường."
+  },
+  {
+    "year": 2024,
+    "category": "Logistics & Transportation",
+    "project_name": "Xanh SM",
+    "domain": "xanhsm.com",
+    "description": "Ứng dụng di chuyển thuần điện."
+  },
+  {
+    "year": 2025,
+    "category": "Corporate",
+    "project_name": "YHC",
+    "domain": "yhc.vn",
+    "description": "Doanh nghiệp hoạt động trong lĩnh vực y tế, chuyên phân phối các thiết bị y khoa, vật tư y tế và cung cấp các giải pháp chăm sóc sức khỏe.",
+    "img":"yhc.svg"
+  },
+  {
+    "year": 2024,
+    "category": "Health & Fitness",
+    "project_name": "Yoga Vietnam",
+    "domain": "yogavietnam.vn",
+    "description": "Nền tảng chuyên cung cấp các thiết bị và dụng cụ yoga chuyên nghiệp, nổi bật với việc phân phối các dòng thảm tập cao cấp như Manduka PRO (đa dạng độ dày từ 3mm, 4mm, 6.5mm đến 10mm), thảm du lịch, dây tập và các phụ kiện hỗ trợ yoga khác.",
+    "img":"yogavietnam.webp"
+  },
+  {
+    "year": 2024,
+    "category": "F&B",
+    "project_name": "Anh Hồng Food",
+    "domain": "anhhongfood.com",
+    "description": "Thương hiệu thực phẩm quen thuộc và lâu đời tại Việt Nam, rất nổi tiếng với các dòng sản phẩm tráng miệng như bánh flan, thạch trái cây và các sản phẩm từ sữa.",
+    "img":"anhhong.webp"
+  },
+  {
+    "year": 2024,
+    "category": "Entertainment",
+    "project_name": "Billards Thành Tâm",
+    "domain": "billardsthanhtam.com",
+    "description": "Cơ sở chuyên sản xuất, thi công, lắp đặt và mua bán các loại bàn bida (billiards) cũng như phân phối phụ kiện cơ bida chuyên nghiệp.",
+    "img":"billards.png"
+  },
+  {
+    "year": 2023,
+    "category": "F&B",
+    "project_name": "Bông Lúa Food",
+    "domain": "bongluafood.vn",
+    "description": "Doanh nghiệp hoạt động trong lĩnh vực nông nghiệp và thực phẩm, chuyên sản xuất, chế biến và cung cấp các sản phẩm gạo sạch, nông sản an toàn.",
+    "img":"bongluafood.png"
+  },
+  {
+    "year": 2024,
+    "category": "Corporate",
+    "project_name": "Boundless HT",
+    "domain": "boundlessht.com",
+    "description": "Công ty cung cấp các giải pháp công nghệ tiên tiến, tư vấn dịch vụ và thiết bị nhằm hỗ trợ tối ưu hóa quy trình vận hành cho các doanh nghiệp.",
+    "img":"boundlessht.png"
+  },
+  {
+    "year": 2023,
+    "category": "Corporate",
+    "project_name": "COEX",
+    "domain": "coex.vn",
+    "description": "Chi nhánh của COEX (Hàn Quốc) tại Việt Nam, chuyên tổ chức các sự kiện, hội chợ, triển lãm thương mại quốc tế (như Vietbaby Fair, Coffee Expo...) và xúc tiến thương mại.",
+    "img":"coex.png"
+  },
+  {
+    "year": 2024,
+    "category": "HR & Recruitment",
+    "project_name": "Daifuku HR",
+    "domain": "daifuku-hr.vn",
+    "description": "Công ty chuyên về dịch vụ nhân sự, cung cấp các giải pháp tư vấn tuyển dụng, đào tạo và cung ứng nguồn nhân lực chất lượng cao cho các doanh nghiệp (đặc biệt là doanh nghiệp Nhật Bản).",
+    "img":"daifuku.png"
+  },
+  {
+    "year": 2023,
+    "category": "Healthcare & Medical",
+    "project_name": "Dược Phẩm Hoàng Hà",
+    "domain": "hoanghapharma.com.vn",
+    "description": "Công ty Dược phẩm Hoàng Hà, đơn vị uy tín chuyên kinh doanh, phân phối các dòng sản phẩm thuốc tân dược, thực phẩm bảo vệ sức khỏe và thiết bị y tế.",
+    "img":"duocphamhoangha.svg",
+     "flag":true
+  },
+  {
+    "year": 2024,
+    "category": "Real Estate & Furniture",
+    "project_name": "Dynasty House",
+    "domain": "dynastyhouse.com.vn",
+    "description": "Hệ thống nhà hàng cao cấp chuyên phục vụ ẩm thực Hong Kong đương đại, nổi bật với các món Dimsum tinh tế, ẩm thực Quảng Đông và hải sản thượng hạng trong không gian sang trọng.",
+    "img":"dynatyhouse.png"
+  },
+  {
+    "year": 2023,
+    "category": "F&B",
+    "project_name": "Gành Hào",
+    "domain": "ganhhao.com.vn",
+    "description": "Thương hiệu nhà hàng hải sản lâu đời và cực kỳ nổi tiếng tại Vũng Tàu, chuyên phục vụ đa dạng các món hải sản tươi sống được chế biến đặc sắc với tầm nhìn sát bờ biển lý tưởng.",
+    "img":"ganhhao.png"
+  },
+  {
+    "year": 2024,
+    "category": "Real Estate & Furniture",
+    "project_name": "Hưng Lộc Phát Windows",
+    "domain": "hunglocphatwindows.com",
+    "description": "Đơn vị chuyên thiết kế, sản xuất, thi công và cung cấp các giải pháp về cửa nhôm kính, cửa nhựa lõi thép và mặt dựng kính cho các công trình dân dụng và dự án.",
+    "img":"hunglocphat.svg"
+  },
+  {
+    "year": 2025,
+    "category": "IT Services",
+    "project_name": "iKame Global",
+    "domain": "ikameglobal.com",
+    "description": "Công ty công nghệ chuyên phát triển và phát hành các ứng dụng, trò chơi di động (mobile games & apps) hướng tới thị trường người dùng toàn cầu.",
+    "img":"ikameglobal.png"
+  },
+  {
+    "year": 2024,
+    "category": "F&B",
+    "project_name": "InDining",
+    "domain": "indining.vn",
+    "description": "Tập đoàn chuyên quản lý, vận hành các trung tâm hội nghị, sự kiện và chuỗi nhà hàng ẩm thực cao cấp, mang đến các trải nghiệm dịch vụ F&B và yến tiệc sang trọng.",
+    "img":"indining.svg"
+  },
+  {
+    "year": 2024,
+    "category": "IT Services",
+    "project_name": "ITG Tech",
+    "domain": "itgtechnology.vn",
+    "description": "Công ty công nghệ uy tín chuyên tư vấn và cung cấp các giải pháp phần mềm quản trị doanh nghiệp toàn diện (ERP) và giải pháp xây dựng nhà máy thông minh (Smart Factory).",
+    "img":"itg.svg"
+  },
+  {
+    "year": 2024,
+    "category": "HR & Recruitment",
+    "project_name": "KVJ Job",
+    "domain": "kvj-job.com",
+    "description": "Nền tảng chuyên cung cấp các dịch vụ tư vấn nhân sự, giới thiệu việc làm và kết nối tuyển dụng giữa ứng viên với các doanh nghiệp.",
+    "img":"kvj-job.png"
+  },
+  {
+    "year": 2025,
+    "category": "Corporate",
+    "project_name": "Skyworld Vietnam",
+    "domain": "skyworldgroup.vn",
+    "description": "Tập đoàn phát triển bất động sản (thương hiệu có nguồn gốc từ Malaysia), chuyên đầu tư, kiến tạo và phát triển các dự án căn hộ, khu dân cư đô thị hiện đại.",
+    "img":"skyword.png"
+  },
+  {
+    "year": 2023,
+    "category": "Corporate",
+    "project_name": "Su Long Hậu",
+    "domain": "sulonghau.com",
+    "description": "Trang web doanh nghiệp địa phương.",
+    "img":"sulonghau.png"
+  },
+  {
+    "year": 2024,
+    "category": "Corporate",
+    "project_name": "TKL",
+    "domain": "tkl.com.vn",
+    "description": "Đây là thương hiệu chuyên cung cấp đa dạng các dịch vụ thiết kế, thi công và duy trì cảnh quan, kiến tạo những không gian xanh độc đáo và bền vững với hệ thống văn phòng cùng các vườn ươm quy mô trải dài từ Bắc vào Nam.",
+    "img":"tkl.png"
+  },
+  {
+    "year": 2025,
+    "category": "Design & Creativity",
+    "project_name": "UK Design Studio",
+    "domain": "ukdsgn.com",
+    "description": "Đây là đơn vị chuyên cung cấp dịch vụ tư vấn, thiết kế kiến trúc và thi công nội thất mang tính sáng tạo cho các công trình nhà ở, thương mại và không gian làm việc.",
+    "img":"ukdsgn.svg"
+  },
+  {
+    "year": 2024,
+    "category": "Education",
+    "project_name": "VAA Edu",
+    "domain": "vaa.edu.vn",
+    "description": "Trang web chính thức của Học viện Hàng không Việt Nam (VAA), cơ sở giáo dục đại học công lập hàng đầu chuyên đào tạo chuyên sâu nguồn nhân lực cho ngành hàng không dân dụng (như quản lý hoạt động bay, kỹ thuật hàng không, tiếp viên...).",
+    "img": "vaa.svg",
+     "flag":true
+  },
+  {
+    "year": 2023,
+    "category": "Education",
+    "project_name": "Vinamex Edu",
+    "domain": "vinamex.edu.vn",
+    "description": "Trung tâm giáo dục chuyên đào tạo ngoại ngữ và tư vấn du học, hỗ trợ học viên chuẩn bị hồ sơ và kỹ năng để học tập tại nước ngoài (chủ yếu là thị trường Nhật Bản, Hàn Quốc)",
+    "img":"vinamex.svg"
+  },
+  {
+    "year": 2024,
+    "category": "HR & Recruitment",
+    "project_name": "Vinamex HR",
+    "domain": "vinamexhr.vn",
+    "description": "Đơn vị hoạt động song song với mảng giáo dục của Vinamex, chuyên về dịch vụ nhân sự, cung ứng nguồn nhân lực và tổ chức xuất khẩu lao động quốc tế.",
+    "img":"vinamex-hr.png"
+  },
+  {
+    "year": 2025,
+    "category": "Events",
+    "project_name": "VIP Premium",
+    "domain": "vipremium.vn",
+    "description": "Triển lãm quốc tế các sản phẩm cao cấp."
+  },
+  {
+    "year": 2024,
+    "category": "Healthcare & Medical",
+    "project_name": "ViVision",
+    "domain": "vivision.vn",
+    "description": "Hệ thống phòng khám chuyên khoa mắt (trước đây là FSEC), chuyên cung cấp các dịch vụ khám chữa bệnh về mắt, kiểm soát cận thị và chăm sóc sức khỏe thị lực toàn diện.",
+    "img":"vivision.png"
+  },
+  {
+    "year": 2025,
+    "category": "F&B",
+    "project_name": "Wow Chips",
+    "domain": "wowchips.vn",
+    "description": "Thương hiệu trong lĩnh vực thực phẩm, chuyên sản xuất và phân phối các loại thức ăn nhẹ, snack (như snack khoai tây) phục vụ nhu cầu tiêu dùng nhanh.",
+    "img":"wowchips.svg"
+  }
+]

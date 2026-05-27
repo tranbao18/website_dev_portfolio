@@ -2,13 +2,15 @@
 
 import { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, Layers, TrendingUp } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import FilterBar from "@/components/FilterBar";
 import ProjectCard from "@/components/ProjectCard";
 import { projects, projectStats, FilterCategory } from "@/data/projects";
 
 export default function ProjectsPage() {
   const [activeFilter, setActiveFilter] = useState<FilterCategory>("all");
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 12;
 
   // Calculate filter counts
   const counts = useMemo(() => {
@@ -34,160 +36,161 @@ export default function ProjectsPage() {
     return projects.filter((p) => p.filterCategory === activeFilter);
   }, [activeFilter]);
 
+  // Paginated projects
+  const totalPages = Math.ceil(filtered.length / itemsPerPage);
+  const paginatedProjects = filtered.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
   const staggerContainer: any = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.06, delayChildren: 0.1 },
+      transition: { staggerChildren: 0.1, delayChildren: 0.1 },
     },
   };
 
+  // Reset page when filter changes
+  const handleFilterChange = (filter: FilterCategory) => {
+    setActiveFilter(filter);
+    setCurrentPage(1);
+  };
+
+  const getPaginationGroup = () => {
+    if (totalPages <= 5) {
+      return Array.from({ length: totalPages }, (_, i) => i + 1);
+    }
+
+    if (currentPage <= 3) {
+      return [1, 2, 3, 4, "...", totalPages];
+    }
+
+    if (currentPage >= totalPages - 2) {
+      return [1, "...", totalPages - 3, totalPages - 2, totalPages - 1, totalPages];
+    }
+
+    return [1, "...", currentPage - 1, currentPage, currentPage + 1, "...", totalPages];
+  };
+
   return (
-    <div className="min-h-screen bg-[#020617] text-slate-200 selection:bg-blue-500/30 selection:text-blue-200 font-sans relative overflow-x-hidden">
-      {/* Ambient Background */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-blue-900/15 blur-[150px]" />
-        <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] rounded-full bg-indigo-900/15 blur-[150px]" />
-        <div className="absolute top-[40%] right-[20%] w-[30%] h-[30%] rounded-full bg-purple-900/10 blur-[120px]" />
-      </div>
+    <div className="min-h-screen bg-[#fcfbf7] text-[#1a1a1a] font-sans relative overflow-x-hidden">
+      {/* Grid Pattern Background */}
+      <div
+        className="fixed inset-0 pointer-events-none opacity-40 z-0"
+        style={{
+          backgroundImage: `linear-gradient(to right, #e2e0d3 1px, transparent 1px), linear-gradient(to bottom, #e2e0d3 1px, transparent 1px)`,
+          backgroundSize: "40px 40px"
+        }}
+      />
 
       {/* Top Navigation Bar */}
-      <nav className="fixed w-full z-50 top-0 border-b border-white/5 bg-slate-950/60 backdrop-blur-xl">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
+      <nav className="relative z-50 w-full pt-6 pb-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           <a
             href="/"
-            className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors group"
+            className="flex items-center gap-2 group"
           >
-            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-            <span className="text-xl font-bold font-outfit tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
-              JB.
+            <span className="text-3xl font-bold font-newsreader tracking-tight text-[#1a1a1a]">
+              Jayden
             </span>
           </a>
 
+          {/* Desktop Nav Links */}
+          <div className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-500">
+            <a href="/" className="hover:text-[#a67c52] transition-colors">Trang chủ</a>
+            <a href="/#about" className="hover:text-[#a67c52] transition-colors">Giới thiệu</a>
+            <a href="/#skills" className="hover:text-[#a67c52] transition-colors">Kỹ năng</a>
+            <a href="/#experience" className="hover:text-[#a67c52] transition-colors">Kinh nghiệm</a>
+            <a href="/projects" className="text-[#a67c52] border-b border-[#a67c52]">Dự Án</a>
+          </div>
+
           <a
             href="/#contact"
-            className="px-5 py-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/10 transition-all font-medium text-sm"
+            className="hidden md:inline-flex px-6 py-2.5 rounded-full bg-[#a67c52] text-white hover:bg-[#8b6540] transition-all font-medium text-sm"
           >
-            Contact Me
+            Liên hệ
           </a>
         </div>
       </nav>
 
-      <main className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 pt-28 sm:pt-36 pb-24">
+      <main className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 sm:pt-20 pb-24">
         {/* Hero Header */}
         <motion.div
-          className="mb-12 sm:mb-16"
-          initial={{ opacity: 0, y: 40 }}
+          className="mb-16 text-center flex flex-col items-center"
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          {/* Badge */}
-          <motion.div
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-300 font-medium text-sm mb-6"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2 }}
-          >
-            <Layers className="w-4 h-4" />
-            Case Studies & Portfolio
-          </motion.div>
+          {/* Breadcrumb */}
+          <div className="text-sm font-medium text-[#a67c52] mb-4">
+            <a href="/" className="hover:underline">Trang chủ</a> <span className="mx-2 text-slate-400">/</span> <span>Dự án</span>
+          </div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-outfit tracking-tight text-white mb-5 leading-[1.1] text-balance">
-            Dự Án{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-400">
-              Tiêu Biểu
-            </span>
+          <h1 className="text-5xl sm:text-6xl md:text-7xl mb-6 leading-tight">
+            <span className="font-playfair font-bold text-[#1a1a1a]">Case Studies </span>
+            <span className="font-playfair font-normal italic text-[#a67c52]">& Portfolio</span>
           </h1>
 
-          <p className="text-lg sm:text-xl text-slate-400 max-w-2xl leading-relaxed mb-8">
-            Hơn{" "}
-            <span className="text-white font-semibold">{projectStats.total}+</span>{" "}
-            dự án từ E-commerce, hệ thống quản lý đến tích hợp AI Agent. Mỗi dự
+          <p className="text-base sm:text-lg text-slate-500 max-w-2xl leading-relaxed mb-12">
+            Hơn 145+ dự án từ E-commerce, hệ thống quản lý đến tích hợp AI Agent. Mỗi dự
             án là một câu chuyện về công nghệ và sáng tạo.
           </p>
 
-          {/* Stats Row */}
-          <div className="flex flex-wrap gap-6 sm:gap-10">
+          {/* Stats Row Container */}
+          <motion.div
+            className="flex flex-wrap md:flex-nowrap justify-center bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 overflow-hidden w-full max-w-4xl"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+          >
             {[
-              { label: "Dự Án", value: `${projectStats.total}+`, icon: "📦" },
-              { label: "Năm Kinh Nghiệm", value: `${projectStats.years.length}+`, icon: "⚡" },
-              { label: "Lĩnh Vực", value: `${projectStats.categories.length}+`, icon: "🎯" },
-              { label: "Thị Trường Quốc Tế", value: "3", icon: "🌏" },
+              { label: "Dự Án", value: `80+` },
+              { label: "Năm Kinh Nghiệm", value: `3+` },
+              { label: "Lĩnh Vực", value: `7+` },
+              { label: "Thị Trường Quốc Tế", value: "3" },
             ].map((stat, i) => (
-              <motion.div
+              <div
                 key={stat.label}
-                className="flex items-center gap-3"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 + i * 0.1 }}
+                className="flex flex-col items-center justify-center p-6 sm:p-8 flex-1 border-b md:border-b-0 md:border-r border-slate-100 last:border-0 min-w-[50%] md:min-w-0"
               >
-                <span className="text-xl">{stat.icon}</span>
-                <div>
-                  <div className="text-xl sm:text-2xl font-bold font-outfit text-white">
-                    {stat.value}
-                  </div>
-                  <div className="text-xs text-slate-500 font-medium uppercase tracking-wider">
-                    {stat.label}
-                  </div>
+                <div className="text-3xl font-bold font-sans text-[#a67c52] mb-1">
+                  {stat.value}
                 </div>
-              </motion.div>
+                <div className="text-[11px] text-slate-500 font-medium uppercase tracking-wider text-center">
+                  {stat.label}
+                </div>
+              </div>
             ))}
-          </div>
+          </motion.div>
         </motion.div>
 
         {/* Filter Bar */}
         <motion.div
-          className="sticky top-16 sm:top-20 z-40 py-4 -mx-4 sm:-mx-6 px-4 sm:px-6 bg-[#020617]/80 backdrop-blur-xl border-b border-white/5 mb-8 sm:mb-10"
+          className="mb-12"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
+          transition={{ delay: 0.4 }}
         >
           <FilterBar
             activeFilter={activeFilter}
-            onFilterChange={setActiveFilter}
+            onFilterChange={handleFilterChange}
             counts={counts}
           />
-        </motion.div>
-
-        {/* Results Count */}
-        <motion.div
-          className="flex items-center gap-2 mb-6 text-sm text-slate-500"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
-        >
-          <TrendingUp className="w-4 h-4" />
-          <span>
-            Hiển thị{" "}
-            <span className="text-white font-semibold">{filtered.length}</span>{" "}
-            dự án
-            {activeFilter !== "all" && (
-              <>
-                {" "}
-                trong danh mục{" "}
-                <button
-                  onClick={() => setActiveFilter("all")}
-                  className="text-blue-400 hover:text-blue-300 underline underline-offset-2 cursor-pointer"
-                >
-                  xem tất cả
-                </button>
-              </>
-            )}
-          </span>
         </motion.div>
 
         {/* Project Grid */}
         <AnimatePresence mode="wait">
           <motion.div
-            key={activeFilter}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6"
+            key={activeFilter + currentPage}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
             variants={staggerContainer}
             initial="hidden"
             animate="visible"
           >
-            {filtered.map((project, index) => (
+            {paginatedProjects.map((project, index) => (
               <ProjectCard
-                key={`${project.domain}-${project.year}`}
+                key={`${project.id || project.domain}-${project.year}`}
                 project={project}
                 index={index}
               />
@@ -203,27 +206,64 @@ export default function ProjectsPage() {
             animate={{ opacity: 1, scale: 1 }}
           >
             <div className="text-6xl mb-6">🔍</div>
-            <h3 className="text-xl font-bold text-white mb-2">
+            <h3 className="text-xl font-bold text-slate-900 mb-2">
               Không tìm thấy dự án
             </h3>
-            <p className="text-slate-400 mb-6">
+            <p className="text-slate-500 mb-6">
               Không có dự án nào trong danh mục này.
             </p>
             <button
-              onClick={() => setActiveFilter("all")}
-              className="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-medium transition-all cursor-pointer"
+              onClick={() => handleFilterChange("all")}
+              className="px-6 py-2.5 rounded-full bg-[#a67c52] text-white font-medium hover:bg-[#8b6540] transition-colors cursor-pointer"
             >
               Xem tất cả dự án
             </button>
           </motion.div>
         )}
+
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="flex items-center justify-center gap-2 mt-16">
+            <button
+              onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+              disabled={currentPage === 1}
+              className="w-10 h-10 flex items-center justify-center rounded-full bg-white border border-slate-200 text-slate-600 hover:border-[#a67c52] hover:text-[#a67c52] disabled:opacity-50 disabled:hover:border-slate-200 disabled:hover:text-slate-600 transition-colors"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+
+            {getPaginationGroup().map((item, i) => (
+              item === "..." ? (
+                <span key={`dots-${i}`} className="w-10 h-10 flex items-center justify-center text-slate-400">...</span>
+              ) : (
+                <button
+                  key={i}
+                  onClick={() => setCurrentPage(item as number)}
+                  className={`w-10 h-10 flex items-center justify-center rounded-full font-medium transition-colors ${currentPage === item
+                    ? "bg-[#a67c52] text-white border border-[#a67c52]"
+                    : "bg-white border border-slate-200 text-slate-600 hover:border-[#a67c52] hover:text-[#a67c52]"
+                    }`}
+                >
+                  {item}
+                </button>
+              )
+            ))}
+
+            <button
+              onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+              disabled={currentPage === totalPages}
+              className="w-10 h-10 flex items-center justify-center rounded-full bg-white border border-slate-200 text-slate-600 hover:border-[#a67c52] hover:text-[#a67c52] disabled:opacity-50 disabled:hover:border-slate-200 disabled:hover:text-slate-600 transition-colors"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
+        )}
       </main>
 
       {/* Footer */}
-      <footer className="relative z-10 border-t border-white/5 py-8 text-center text-slate-500 text-sm">
+      <footer className="relative z-10 border-t border-slate-200/60 py-8 text-center text-slate-500 text-sm">
         <p>
-          © {new Date().getFullYear()} Trần Thiên Bảo. Thiết kế và phát triển
-          với Next.js & Tailwind CSS.
+          © {new Date().getFullYear()} Trần Thiên Bảo (Jayden). Tất cả dự án được thực hiện với ❤️ và sự tận tâm.
         </p>
       </footer>
     </div>
