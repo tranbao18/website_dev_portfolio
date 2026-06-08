@@ -128,14 +128,7 @@
     "description": "Trung tâm đào tạo tiếng Nhật, tư vấn du học và cung ứng/xuất khẩu lao động uy tín (chủ yếu thị trường Nhật Bản).",
     "img":"hanoilink.png"
   },
-  {
-    "year": 2024,
-    "category": "Retail",
-    "project_name": "Happy Phone",
-    "domain": "happyphone.vn",
-    "description": "Hệ thống cửa hàng bán lẻ điện thoại, máy tính bảng, phụ kiện công nghệ và đồ điện gia dụng chính hãng.",
-    "img":"Happy-Phone.svg"
-  },
+  
   {
     "year": 2024,
     "category": "Corporate",
