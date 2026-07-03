@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: Request) {
   try {
@@ -12,21 +14,9 @@ export async function POST(req: Request) {
       );
     }
 
-    // Configure Nodemailer transporter
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: Number(process.env.SMTP_PORT) || 587,
-      secure: Number(process.env.SMTP_PORT) === 465, // true for 465, false for other ports
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    });
-
-    // Setup email data
-    const mailOptions = {
-      from: `"${name}" <${process.env.SMTP_FROM || process.env.SMTP_USER}>`, // sender address
-      to: process.env.SMTP_TO, // list of receivers
+    const { data, error } = await resend.emails.send({
+      from: `Portfolio Contact <onboarding@resend.dev>`, // Must use onboarding@resend.dev unless you verify a custom domain
+      to: process.env.SMTP_TO as string, // Your email address to receive the message
       subject: `[Portfolio Contact] Tin nhắn mới từ ${name}`,
       text: `Bạn nhận được một tin nhắn liên hệ từ Portfolio:\n\nTên: ${name}\nEmail: ${email}\n\nNội dung tin nhắn:\n${message}`,
       html: `
@@ -38,19 +28,25 @@ export async function POST(req: Request) {
           ${message.replace(/\n/g, '<br>')}
         </blockquote>
       `,
-    };
+      replyTo: email,
+    });
 
-    // Send the email
-    await transporter.sendMail(mailOptions);
+    if (error) {
+      console.error('Resend error:', error);
+      return NextResponse.json(
+        { error: 'Failed to send email' },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json(
-      { message: 'Email sent successfully' },
+      { message: 'Email sent successfully', id: data?.id },
       { status: 200 }
     );
   } catch (error) {
-    console.error('Error sending email:', error);
+    console.error('Error in email route:', error);
     return NextResponse.json(
-      { error: 'Failed to send email' },
+      { error: 'Internal Server Error' },
       { status: 500 }
     );
   }
