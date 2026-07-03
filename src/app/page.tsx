@@ -128,7 +128,7 @@ export default function Home() {
                 <div className="font-mono text-xl text-[#0070F3] font-medium tracking-tighter">
                   <motion.span
                     animate={{ opacity: [1, 0, 1] }}
-                    transition={{ duration: 1, repeat: Infinity, ease: "steps(2)" }}
+                    transition={{ duration: 1, repeat: Infinity, ease: "linear", times: [0, 0.5, 1] }}
                   >_</motion.span>dev
                 </div>
               </motion.div>
