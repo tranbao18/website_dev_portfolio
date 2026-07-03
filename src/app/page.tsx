@@ -71,10 +71,10 @@ export default function Home() {
             Bao Tran <span className="logo-accent">.</span>
           </Link>
           <div className="nav-links">
-            <a href="#about" onClick={scrollToSection}>Giới thiệu</a>
-            <a href="#skills" onClick={scrollToSection}>Kỹ năng</a>
-            <a href="#projects" onClick={scrollToSection}>Dự án</a>
-            <a href="#contact" className="nav-cta" onClick={scrollToSection}>Liên hệ</a>
+            <a href="#about">Giới thiệu</a>
+            <a href="#skills">Kỹ năng</a>
+            <a href="#projects">Dự án</a>
+            <a href="#contact" className="nav-cta">Liên hệ</a>
           </div>
         </div>
       </nav>
