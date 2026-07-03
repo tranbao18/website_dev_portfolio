@@ -45,18 +45,18 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
       initial="hidden"
       animate="visible"
       exit="exit"
-      className="group relative flex flex-col rounded-2xl bg-white border border-slate-100 overflow-hidden hover:shadow-xl transition-all duration-500"
+      className="group relative flex flex-col rounded-2xl bg-[#111111] border border-[#27272a] overflow-hidden hover:border-[#0070F3]/50 transition-all duration-300 hover:-translate-y-1 shadow-lg shadow-black/50"
     >
       {/* Thumbnail Area */}
-      <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
+      <div className="relative aspect-[4/3] overflow-hidden bg-[#0a0a0a] border-b border-[#27272a]">
         <img 
           src={imageUrl} 
           alt={project.project_name}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+          className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out"
         />
 
         {/* Floating Category Badge top-left */}
-        <div className="absolute top-4 left-4 z-10 px-3 py-1 rounded-full bg-white/90 backdrop-blur-sm shadow-sm text-[11px] font-semibold text-slate-700 tracking-wider">
+        <div className="absolute top-4 left-4 z-10 px-3 py-1 rounded-full bg-[#0a0a0a]/80 border border-[#27272a] backdrop-blur-md text-[10px] uppercase font-mono text-[#0070F3] tracking-widest">
           {project.category}
         </div>
       </div>
@@ -64,12 +64,12 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
       {/* Card Body */}
       <div className="flex flex-col flex-1 p-6">
         {/* Title */}
-        <h3 className="text-xl font-bold font-sans text-slate-900 mb-3 group-hover:text-[#a67c52] transition-colors duration-300">
+        <h3 className="text-xl font-medium text-[#ededed] mb-3 group-hover:text-[#0070F3] transition-colors duration-300" style={{ fontFamily: 'var(--font-outfit)' }}>
           {project.project_name}
         </h3>
 
         {/* Description */}
-        <p className="text-sm text-slate-500 leading-relaxed mb-6 flex-1 line-clamp-3">
+        <p className="text-sm text-[#a1a1aa] leading-relaxed mb-6 flex-1 line-clamp-3">
           {project.description}
         </p>
 
@@ -78,7 +78,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
           href={siteUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center justify-center gap-2 w-max px-6 py-2.5 rounded-full bg-[#a67c52] text-white text-sm font-medium hover:bg-[#8b6540] transition-colors duration-300 group/btn"
+          className="inline-flex items-center justify-center gap-2 w-max px-5 py-2 rounded-lg bg-transparent border border-[#27272a] text-[#ededed] text-sm font-medium hover:bg-[#0070F3]/10 hover:border-[#0070F3]/30 hover:text-[#0070F3] active:scale-[0.98] transition-all duration-300 group/btn"
         >
           <span>Xem chi tiết</span>
           <span className="opacity-80 group-hover/btn:translate-x-1 transition-transform duration-300">→</span>

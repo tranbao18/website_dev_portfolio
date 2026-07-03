@@ -1,19 +1,19 @@
 import type { Metadata } from "next";
-import { Inter, Outfit, Newsreader } from "next/font/google";
+import { Geist, Geist_Mono, Outfit } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+const geist = Geist({
+  variable: "--font-geist",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
   subsets: ["latin"],
 });
 
 const outfit = Outfit({
   variable: "--font-outfit",
-  subsets: ["latin"],
-});
-
-const newsreader = Newsreader({
-  variable: "--font-newsreader",
   subsets: ["latin"],
 });
 
@@ -30,9 +30,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${outfit.variable} ${newsreader.variable} h-full antialiased`}
+      className={`${geist.variable} ${geistMono.variable} ${outfit.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-sans bg-[#fdf9f3] text-[#2b2520]">{children}</body>
+      <body className="min-h-full flex flex-col font-sans bg-[#0a0a0a] text-[#ededed]">{children}</body>
     </html>
   );
 }
