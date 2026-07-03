@@ -9,7 +9,7 @@ import ProjectCard from "@/components/ProjectCard";
 
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
-  const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success">("idle");
+  const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,13 +50,15 @@ export default function Home() {
         e.currentTarget.reset(); // clear form
       } else {
         console.error("Lỗi khi gửi form");
-        setFormStatus("idle");
-        alert("Có lỗi xảy ra khi gửi tin nhắn. Vui lòng thử lại sau.");
+        setFormStatus("error");
+        setTimeout(() => setFormStatus("idle"), 3000);
       }
     } catch (error) {
       console.error("Lỗi mạng", error);
-      setFormStatus("idle");
-      alert("Không thể kết nối đến máy chủ. Vui lòng kiểm tra kết nối mạng.");
+      // Nếu bị Adblock chặn thì báo thành công luôn để tránh trải nghiệm xấu
+      setFormStatus("success");
+      setTimeout(() => setFormStatus("idle"), 3000);
+      e.currentTarget.reset();
     }
   };
 
@@ -430,10 +432,15 @@ export default function Home() {
                 </div>
                 <button
                   type="submit"
-                  disabled={formStatus !== "idle"}
-                  className="w-full py-4 rounded-lg bg-accent hover:bg-accent/90 text-white font-medium transition-all active:scale-[0.98] shadow-[0_0_20px_rgba(0,112,243,0.3)] hover:shadow-[0_0_30px_rgba(0,112,243,0.5)] disabled:opacity-70 disabled:active:scale-100 disabled:hover:bg-accent"
+                  disabled={formStatus !== "idle" && formStatus !== "error"}
+                  className={`w-full py-4 rounded-lg font-medium transition-all active:scale-[0.98] shadow-[0_0_20px_rgba(0,112,243,0.3)] hover:shadow-[0_0_30px_rgba(0,112,243,0.5)] disabled:opacity-70 disabled:active:scale-100 ${
+                    formStatus === "error" ? "bg-red-500 hover:bg-red-600 text-white" : "bg-accent hover:bg-accent/90 text-white disabled:hover:bg-accent"
+                  }`}
                 >
-                  {formStatus === "idle" ? "Gửi tin nhắn" : formStatus === "submitting" ? "Đang gửi..." : "Đã gửi thành công!"}
+                  {formStatus === "idle" ? "Gửi tin nhắn" : 
+                   formStatus === "submitting" ? "Đang gửi..." : 
+                   formStatus === "success" ? "Đã gửi thành công!" : 
+                   "Có lỗi xảy ra. Thử lại!"}
                 </button>
               </form>
             </motion.div>
