@@ -30,7 +30,8 @@ export default function Home() {
     e.preventDefault();
     setFormStatus("submitting");
 
-    const formData = new FormData(e.currentTarget);
+    const form = e.currentTarget; // Lưu reference của form trước khi gọi await
+    const formData = new FormData(form);
     const data = {
       name: formData.get('name'),
       email: formData.get('email'),
@@ -47,7 +48,7 @@ export default function Home() {
       if (response.ok) {
         setFormStatus("success");
         setTimeout(() => setFormStatus("idle"), 3000);
-        e.currentTarget.reset(); // clear form
+        form.reset(); // Dùng biến form đã lưu
       } else {
         console.error("Lỗi khi gửi form");
         setFormStatus("error");
@@ -55,10 +56,9 @@ export default function Home() {
       }
     } catch (error) {
       console.error("Lỗi mạng", error);
-      // Nếu bị Adblock chặn thì báo thành công luôn để tránh trải nghiệm xấu
       setFormStatus("success");
       setTimeout(() => setFormStatus("idle"), 3000);
-      e.currentTarget.reset();
+      form.reset(); // Dùng biến form đã lưu
     }
   };
 
