@@ -26,13 +26,38 @@ export default function Home() {
 
   const featuredProjects = projects.filter(p => p.flag);
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setFormStatus("submitting");
-    setTimeout(() => {
-      setFormStatus("success");
-      setTimeout(() => setFormStatus("idle"), 2500);
-    }, 1000);
+
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      message: formData.get('message')
+    };
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      if (response.ok) {
+        setFormStatus("success");
+        setTimeout(() => setFormStatus("idle"), 3000);
+        e.currentTarget.reset(); // clear form
+      } else {
+        console.error("Lỗi khi gửi form");
+        setFormStatus("idle");
+        alert("Có lỗi xảy ra khi gửi tin nhắn. Vui lòng thử lại sau.");
+      }
+    } catch (error) {
+      console.error("Lỗi mạng", error);
+      setFormStatus("idle");
+      alert("Không thể kết nối đến máy chủ. Vui lòng kiểm tra kết nối mạng.");
+    }
   };
 
   return (
@@ -43,15 +68,14 @@ export default function Home() {
       }}>
         <div className="topnav-inner">
           <Link href="/" className="logo" style={{ color: scrolled ? 'var(--fg)' : '#fff' }}>
-            <span className="gradient">J</span>ayden
+            Bao Tran <span className="logo-accent">.</span>
           </Link>
-          <ul className="nav-links">
-            <li><a href="#about" style={{ color: scrolled ? undefined : 'rgba(255,255,255,0.9)' }}>Giới thiệu</a></li>
-            <li><a href="#skills" style={{ color: scrolled ? undefined : 'rgba(255,255,255,0.9)' }}>Kỹ năng</a></li>
-            <li><a href="#experience" style={{ color: scrolled ? undefined : 'rgba(255,255,255,0.9)' }}>Kinh nghiệm</a></li>
-            <li><a href="#projects" style={{ color: scrolled ? undefined : 'rgba(255,255,255,0.9)' }}>Dự án</a></li>
-            <li><a href="#contact" className="btn-nav">Liên hệ</a></li>
-          </ul>
+          <div className="nav-links">
+            <a href="#about" onClick={scrollToSection}>Giới thiệu</a>
+            <a href="#skills" onClick={scrollToSection}>Kỹ năng</a>
+            <a href="#projects" onClick={scrollToSection}>Dự án</a>
+            <a href="#contact" className="nav-cta" onClick={scrollToSection}>Liên hệ</a>
+          </div>
         </div>
       </nav>
 
@@ -391,17 +415,17 @@ export default function Home() {
               <form onSubmit={handleFormSubmit} className="space-y-5">
                 <div>
                   <label htmlFor="name" className="block text-xs font-mono text-[#a1a1aa] mb-2 uppercase tracking-wider">Họ và tên</label>
-                  <input type="text" id="name" placeholder="Nguyễn Văn A" required disabled={formStatus !== "idle"}
+                  <input type="text" id="name" name="name" placeholder="Nguyễn Văn A" required disabled={formStatus !== "idle"}
                     className="w-full bg-[#0a0a0a] border border-[#27272a] rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all placeholder:text-[#3f3f46]" />
                 </div>
                 <div>
                   <label htmlFor="email" className="block text-xs font-mono text-[#a1a1aa] mb-2 uppercase tracking-wider">Email</label>
-                  <input type="email" id="email" placeholder="example@company.com" required disabled={formStatus !== "idle"}
+                  <input type="email" id="email" name="email" placeholder="example@company.com" required disabled={formStatus !== "idle"}
                     className="w-full bg-[#0a0a0a] border border-[#27272a] rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all placeholder:text-[#3f3f46]" />
                 </div>
                 <div>
                   <label htmlFor="msg" className="block text-xs font-mono text-[#a1a1aa] mb-2 uppercase tracking-wider">Tin nhắn</label>
-                  <textarea id="msg" placeholder="Mô tả dự án hoặc cơ hội bạn muốn trao đổi..." required disabled={formStatus !== "idle"} rows={4}
+                  <textarea id="msg" name="message" placeholder="Mô tả dự án hoặc cơ hội bạn muốn trao đổi..." required disabled={formStatus !== "idle"} rows={4}
                     className="w-full bg-[#0a0a0a] border border-[#27272a] rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all resize-y placeholder:text-[#3f3f46]"></textarea>
                 </div>
                 <button
@@ -419,4 +443,3 @@ export default function Home() {
     </>
   );
 }
-
