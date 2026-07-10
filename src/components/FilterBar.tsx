@@ -11,26 +11,21 @@ interface FilterBarProps {
 
 export default function FilterBar({ activeFilter, onFilterChange, counts }: FilterBarProps) {
   return (
-    <div className="flex flex-wrap justify-center gap-3 w-full max-w-4xl mx-auto py-2">
+    <div className="flex flex-wrap justify-center gap-3 w-full max-w-5xl mx-auto py-2">
       {filterOptions.map((option) => {
         const isActive = activeFilter === option.key;
-        const count = option.key === "all" ? counts.all : (counts[option.key] || 0);
 
-        // We can optionally show count, but the design didn't explicitly have count badges in the pills
-        // or wait, looking at the image, there are no count badges on the filter pills. Just text.
-        // E.g. "Tất cả", "E-Commerce", "Corporate & Business".
-        
         return (
           <button
             key={option.key}
             onClick={() => onFilterChange(option.key)}
             className={`
-              px-5 py-2 rounded-full font-medium text-sm transition-all duration-300
-              border
+              relative px-5 py-2 rounded-full font-medium text-sm transition-all duration-300
+              border cursor-pointer
               ${
                 isActive
-                  ? "bg-[#a67c52] border-[#a67c52] text-white shadow-md shadow-[#a67c52]/20"
-                  : "bg-white border-slate-200 text-slate-600 hover:border-[#a67c52] hover:text-[#a67c52]"
+                  ? "bg-[var(--accent)] border-[var(--accent)] text-white shadow-[0_0_20px_rgba(0,112,243,0.3)]"
+                  : "bg-[#111] border-[#27272a] text-[#a1a1aa] hover:border-[var(--accent)] hover:text-[var(--accent)]"
               }
             `}
           >
