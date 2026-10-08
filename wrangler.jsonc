@@ -1,7 +1,7 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"main": ".open-next/worker.js",
-	"name": "website-dev-portfolio",
+	"name": "portfolio",
 	"compatibility_date": "2026-10-06",
 	"compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
 	"assets": {
@@ -13,7 +13,7 @@
 			// Self-reference service binding, the service name must match the worker name
 			// see https://opennext.js.org/cloudflare/caching
 			"binding": "WORKER_SELF_REFERENCE",
-			"service": "website-dev-portfolio"
+			"service": "portfolio"
 		}
 	],
 	// No R2 incremental cache: every page is static and nothing uses ISR/revalidate
