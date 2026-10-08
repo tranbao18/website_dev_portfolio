@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Spray } from "@/components/Decor";
+import SocialIcon from "@/components/SocialIcon";
 import { profile, socials } from "@/data/profile";
 
 const FOOTER_LINKS = [
@@ -42,14 +43,14 @@ export default function SiteFooter() {
             <div className="mt-6 flex gap-2 md:justify-end">
               {socials.map((s) => (
                 <a
-                  key={s.short}
+                  key={s.icon}
                   href={s.href}
                   className="social-dot"
                   aria-label={s.label}
                   title={s.label}
                   {...(s.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                 >
-                  {s.short}
+                  <SocialIcon name={s.icon} />
                 </a>
               ))}
             </div>

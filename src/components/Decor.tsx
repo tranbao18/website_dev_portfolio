@@ -49,6 +49,7 @@ export function WavyBadge({
   return (
     <a
       href={href}
+      {...(href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       className={`group relative inline-flex aspect-square items-center justify-center text-center text-white ${className}`}
     >
       <svg viewBox="0 0 200 200" aria-hidden="true" className="spin-slow absolute inset-0 h-full w-full">

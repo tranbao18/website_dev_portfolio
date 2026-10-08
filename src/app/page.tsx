@@ -9,6 +9,7 @@ import ContactForm from "@/components/ContactForm";
 import FeaturedProject from "@/components/FeaturedProject";
 import Reveal from "@/components/Reveal";
 import { LoopArrow, Scribble, Sparkle, Spray, WavyBadge } from "@/components/Decor";
+import SocialIcon from "@/components/SocialIcon";
 import { projects, projectStats } from "@/data/projects";
 import { profile, socials } from "@/data/profile";
 
@@ -104,7 +105,7 @@ export default function Home() {
             <div className="pad relative grid min-h-[560px] items-center py-16 lg:py-20">
               <Reveal className="relative z-10">
                 <h1 className="font-display text-[clamp(3rem,10vw,7.5rem)] font-normal leading-[0.98] tracking-[-0.035em]">
-                  <span className="block">Full-Stack</span>
+                  <span className="block">Full-stack</span>
                   <span className="block text-blue">Developer &amp;</span>
                   <span className="flex items-center gap-[0.2em]">
                     more <Sparkle className="h-[0.45em] w-[0.45em] text-blue" />
@@ -147,13 +148,15 @@ export default function Home() {
               </p>
               <h2 className="mt-2 text-5xl font-medium tracking-tight md:text-7xl">{profile.name}</h2>
               <p className="mt-10 text-xl font-light leading-[1.7] md:text-[1.7rem] md:leading-[1.65]">
-                Tôi là <span className="mark">PHP &amp; Fullstack Developer</span> với hơn{" "}
-                <span className="mark">3 năm kinh nghiệm</span> tùy chỉnh CMS và phát triển backend, hiện sống tại TP. Hồ
-                Chí Minh.
+                Tôi là <span className="mark">Full-stack Developer</span> với hơn{" "}
+                <span className="mark">3 năm kinh nghiệm</span> xây dựng website doanh nghiệp, thương mại điện tử và CMS
+                tùy chỉnh, hiện sống tại TP. Hồ Chí Minh.
               </p>
               <p className="mt-6 max-w-[56ch] leading-relaxed text-muted">
-                Kỹ năng đọc tài liệu tiếng Anh tốt giúp tôi nhanh chóng làm chủ React, Next.js, Node.js và chuyển đổi
-                linh hoạt từ kiến trúc monolithic truyền thống sang modern web stack.
+                Tôi đảm nhận trọn quy trình, từ chuyển thiết kế Figma thành giao diện responsive, xây dựng REST API và
+                logic nghiệp vụ bằng PHP &amp; MySQL, đến tối ưu truy vấn, triển khai máy chủ và bảo mật hệ thống. Ngoài
+                hệ sinh thái PHP và WordPress, tôi còn phát triển với React, Next.js, Node.js và tận dụng công cụ AI để
+                đẩy nhanh tiến độ mà vẫn giữ chất lượng code.
               </p>
             </Reveal>
 
@@ -163,7 +166,7 @@ export default function Home() {
                 <div className="flex gap-2">
                   {socials.map((s, i) => (
                     <a
-                      key={s.short}
+                      key={s.icon}
                       href={s.href}
                       data-filled={i === 0}
                       className="social-dot"
@@ -171,7 +174,7 @@ export default function Home() {
                       title={s.label}
                       {...(s.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                     >
-                      {s.short}
+                      <SocialIcon name={s.icon} />
                     </a>
                   ))}
                 </div>
@@ -328,7 +331,7 @@ export default function Home() {
               </h2>
             </Reveal>
             <Reveal delay={0.1} className="mt-10 flex justify-center">
-              <WavyBadge href={`mailto:${profile.email}`} tone="ink" className="w-36 md:w-40">
+              <WavyBadge href={profile.facebook} tone="ink" className="w-36 md:w-40">
                 Sẵn sàng
                 <br />
                 trò chuyện

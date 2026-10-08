@@ -15,8 +15,8 @@ const script = Dancing_Script({
 });
 
 export const metadata: Metadata = {
-  title: "Trần Thiên Bảo | PHP & Fullstack Developer",
-  description: "Trần Thiên Bảo (Jayden) - PHP & Fullstack Developer Portfolio. Kiến tạo giải pháp Web hiệu quả và tối ưu.",
+  title: "Trần Thiên Bảo | Full-stack Developer",
+  description: "Trần Thiên Bảo (Jayden) - Full-stack Developer Portfolio. Kiến tạo giải pháp Web hiệu quả và tối ưu.",
 };
 
 export default function RootLayout({
