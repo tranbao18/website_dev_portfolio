@@ -1,20 +1,17 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Outfit } from "next/font/google";
+import { Dancing_Script, Lexend } from "next/font/google";
 import "./globals.css";
 
-const geist = Geist({
-  variable: "--font-geist",
-  subsets: ["latin"],
+// Lexend is close to the reference's geometric sans and, unlike Outfit/Geist, ships a Vietnamese subset
+const lexend = Lexend({
+  variable: "--font-lexend",
+  subsets: ["latin", "vietnamese"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-const outfit = Outfit({
-  variable: "--font-outfit",
-  subsets: ["latin"],
+const script = Dancing_Script({
+  variable: "--font-script",
+  subsets: ["latin", "vietnamese"],
+  weight: ["600"],
 });
 
 export const metadata: Metadata = {
@@ -29,10 +26,10 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
-      className={`${geist.variable} ${geistMono.variable} ${outfit.variable} h-full antialiased`}
+      lang="vi"
+      className={`${lexend.variable} ${script.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-sans bg-[#0a0a0a] text-[#ededed]">{children}</body>
+      <body className="min-h-full flex flex-col font-sans bg-paper text-ink">{children}</body>
     </html>
   );
 }

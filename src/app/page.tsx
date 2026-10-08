@@ -1,452 +1,380 @@
-"use client";
-
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
-import { ExternalLink } from "lucide-react";
-import { projects } from "@/data/projects";
-import ProjectCard from "@/components/ProjectCard";
+import { ArrowUpRight, Check, CodeXml, Database, Layers, Mail, MapPin, Phone } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import avatar from "../../public/avatar (3).jpg";
+import SiteNav from "@/components/SiteNav";
+import SiteFooter from "@/components/SiteFooter";
+import ContactForm from "@/components/ContactForm";
+import FeaturedProject from "@/components/FeaturedProject";
+import Reveal from "@/components/Reveal";
+import { LoopArrow, Scribble, Sparkle, Spray, WavyBadge } from "@/components/Decor";
+import { projects, projectStats } from "@/data/projects";
+import { profile, socials } from "@/data/profile";
+
+const STATS = [
+  { value: projectStats.totalLabel, label: "Dự án đã triển khai" },
+  { value: "3+", label: "Năm kinh nghiệm" },
+  { value: "7+", label: "Lĩnh vực" },
+];
+
+const SKILL_CARDS: {
+  icon: LucideIcon;
+  title: string;
+  subtitle: string;
+  items: string[];
+  tone: "blue" | "soft" | "softer";
+}[] = [
+  {
+    icon: CodeXml,
+    title: "Frontend & UI Development.",
+    subtitle: "Giao diện chuẩn thiết kế, nhanh và responsive",
+    items: ["JavaScript, HTML5 & CSS3", "Tailwind CSS", "ReactJS & NextJS", "Zustand"],
+    tone: "blue",
+  },
+  {
+    icon: Database,
+    title: "Backend & Database.",
+    subtitle: "Hệ thống ổn định, bảo mật, dễ mở rộng",
+    items: ["PHP & NodeJS", "MySQL, MongoDB & Redis", "REST API", "WordPress"],
+    tone: "soft",
+  },
+  {
+    icon: Layers,
+    title: "Công cụ & Quy trình.",
+    subtitle: "Tăng tốc phát triển với AI và Git",
+    items: ["Cursor, Claude & Antigravity", "Figma", "Postman", "GitLab & GitHub"],
+    tone: "softer",
+  },
+];
+
+const TONES = {
+  blue: { card: "bg-blue text-white", sub: "text-white/70", icon: "text-white" },
+  soft: { card: "bg-blue-soft text-ink", sub: "text-ink/60", icon: "text-blue" },
+  softer: { card: "bg-blue-softer text-ink", sub: "text-ink/60", icon: "text-blue" },
+};
+
+const WORK = {
+  period: "2023 — 2026",
+  title: "MONA MEDIA",
+  role: "Junior PHP Developer",
+  points: [
+    "Phát triển các giải pháp thương mại điện tử, CMS và backend tùy chỉnh có khả năng mở rộng bằng PHP và MySQL.",
+    "Gỡ lỗi hệ thống, hỗ trợ các thành viên nhóm và quản lý mã nguồn bằng Git.",
+    "Chuyển đổi các bản thiết kế Figma thành giao diện động, responsive bằng Tailwind CSS, JavaScript và AJAX.",
+    "Thiết kế logic nghiệp vụ, xây dựng API REST và tối ưu hóa hiệu suất hệ thống.",
+    "Tối ưu truy vấn cơ sở dữ liệu, quản lý triển khai máy chủ và thực thi các biện pháp bảo mật.",
+    "Sử dụng các công cụ AI để nâng cao hiệu quả phát triển.",
+  ],
+};
+
+const EDUCATION = [
+  { period: "2024 — 2025", title: "Đại học Công nghệ Thông tin (UIT)", role: "Cử nhân Công nghệ thông tin", note: "GPA: 3.2" },
+  { period: "2021 — 2023", title: "Cao đẳng Công Nghệ Thông Tin", role: "Công nghệ thông tin", note: "GPA: 3.1" },
+];
 
 export default function Home() {
-  const [scrolled, setScrolled] = useState(false);
-  const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const revealVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] as const } }
-  };
-
-  const featuredProjects = projects.filter(p => p.flag);
-
-  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setFormStatus("submitting");
-
-    const form = e.currentTarget; // Lưu reference của form trước khi gọi await
-    const formData = new FormData(form);
-    const data = {
-      name: formData.get('name'),
-      email: formData.get('email'),
-      message: formData.get('message')
-    };
-
-    try {
-      const response = await fetch('/api/send', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
-
-      if (response.ok) {
-        setFormStatus("success");
-        setTimeout(() => setFormStatus("idle"), 3000);
-        form.reset(); // Dùng biến form đã lưu
-      } else {
-        console.error("Lỗi khi gửi form");
-        setFormStatus("error");
-        setTimeout(() => setFormStatus("idle"), 3000);
-      }
-    } catch (error) {
-      console.error("Lỗi mạng", error);
-      setFormStatus("success");
-      setTimeout(() => setFormStatus("idle"), 3000);
-      form.reset(); // Dùng biến form đã lưu
-    }
-  };
+  const featured = projects.filter((p) => p.flag);
+  const clientHosts = projects
+    .filter((p) => p.img && !p.host.endsWith("vercel.app"))
+    .slice(0, 14)
+    .map((p) => p.host);
 
   return (
     <>
-      <nav className={`topnav ${scrolled ? "scrolled" : ""}`} id="topnav" style={{
-        background: scrolled ? undefined : 'linear-gradient(to bottom, rgba(0,0,0,0.6), transparent)',
-        borderBottom: 'none'
-      }}>
-        <div className="topnav-inner">
-          <Link href="/" className="logo" style={{ color: scrolled ? 'var(--fg)' : '#fff' }}>
-            Bao Tran <span className="logo-accent">.</span>
-          </Link>
-          <div className="nav-links">
-            <a href="#about">Giới thiệu</a>
-            <a href="#skills">Kỹ năng</a>
-            <a href="#projects">Dự án</a>
-            <a href="#contact" className="nav-cta">Liên hệ</a>
-          </div>
-        </div>
-      </nav>
+      <SiteNav />
 
-      <main>
-        {/* ═══ HERO ═══ */}
-        <section className="relative w-full min-h-[100dvh] flex items-center pt-24 pb-16 lg:pt-0" id="hero">
-          <div className="container relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+      <main className="frame">
+        {/* ═══ HERO + INTRO ═══ */}
+        <section id="hero" className="relative border-t border-line">
+          <div className="relative">
+            <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
+              <Spray className="inset-y-0 right-0 w-[80%] lg:w-[62%]" shape="farthest-side at 100% 55%" />
+            </div>
 
-            {/* Left: Content */}
-            <motion.div
-              className="max-w-xl"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <div className="eyebrow mb-6 text-accent tracking-widest text-xs font-mono uppercase">Fullstack Developer</div>
-              <motion.h1
-                className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-white mb-6 leading-[1.1]"
-                style={{ fontFamily: 'var(--font-outfit)' }}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              >
-                Trần Thiên Bảo
-              </motion.h1>
-              <motion.p
-                className="text-lg text-[#a1a1aa] mb-8 leading-relaxed max-w-[40ch]"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              >
-                Kiến trúc website tối ưu, giải pháp hệ thống bền vững. Chuyển đổi mượt mà từ PHP nguyên thủy sang kiến trúc Fullstack thế hệ mới.
-              </motion.p>
-              <motion.div
-                className="flex flex-wrap gap-4"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              >
-                <a href="#projects" className="btn btn-primary rounded-full px-7 py-3">Xem dự án</a>
-                <a href="#contact" className="btn btn-outline rounded-full px-7 py-3">Kết nối với tôi</a>
-              </motion.div>
-            </motion.div>
+            {/* "Let's build" sticker */}
+            <div className="absolute right-[5%] top-10 hidden h-28 w-48 -rotate-12 items-center justify-center rounded-[50%] border border-ink md:flex">
+              <p className="text-center text-xs uppercase leading-snug tracking-wide">
+                Let&apos;s build
+                <br />
+                <span className="inline-block border-b border-ink pb-1">something great</span>
+              </p>
+            </div>
 
-            {/* Right: Tech Animation */}
-            <motion.div
-              className="relative w-full aspect-square max-w-lg mx-auto lg:ml-auto lg:mr-0 flex items-center justify-center"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            >
-              {/* Outer rotating ring */}
-              <motion.div
-                className="absolute inset-0 rounded-full border border-[#27272a] border-dashed"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-              />
-              {/* Inner glowing orbit */}
-              <motion.div
-                className="absolute inset-12 rounded-full border border-[#0070F3]/30"
-                animate={{ rotate: -360 }}
-                transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-              >
-                <div className="absolute top-0 left-1/2 w-2 h-2 -ml-1 -mt-1 bg-[#0070F3] rounded-full shadow-[0_0_10px_#0070F3]" />
-                <div className="absolute bottom-0 right-1/4 w-1.5 h-1.5 bg-[#00e6ff] rounded-full shadow-[0_0_8px_#00e6ff]" />
-              </motion.div>
-              {/* Core shape */}
-              <motion.div
-                className="relative z-10 w-32 h-32 bg-[#111111] rounded-2xl border border-[#27272a] shadow-[0_0_40px_rgba(0,112,243,0.15)] flex items-center justify-center overflow-hidden"
-                animate={{ y: [-10, 10, -10] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-[#0070F3]/10 to-transparent opacity-50" />
-                <div className="font-mono text-xl text-[#0070F3] font-medium tracking-tighter">
-                  <motion.span
-                    animate={{ opacity: [1, 0, 1] }}
-                    transition={{ duration: 1, repeat: Infinity, ease: "linear", times: [0, 0.5, 1] }}
-                  >_</motion.span>dev
-                </div>
-              </motion.div>
-
-              {/* Floating tech elements */}
-              <motion.div
-                className="absolute top-1/4 -left-4 bg-[#111] border border-[#27272a] px-3 py-1.5 rounded-lg text-xs font-mono text-[#a1a1aa] shadow-lg"
-                animate={{ y: [0, -15, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-              >
-                React.FC
-              </motion.div>
-              <motion.div
-                className="absolute bottom-1/4 right-0 bg-[#111] border border-[#27272a] px-3 py-1.5 rounded-lg text-xs font-mono text-[#a1a1aa] shadow-lg"
-                animate={{ y: [0, 15, 0] }}
-                transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-              >
-                SELECT *
-              </motion.div>
-              <motion.div
-                className="absolute top-10 right-10 bg-[#111] border border-[#27272a] px-3 py-1.5 rounded-lg text-xs font-mono text-[#a1a1aa] shadow-lg"
-                animate={{ y: [0, 10, 0], x: [0, -5, 0] }}
-                transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-              >
-                API_ROUTE
-              </motion.div>
-            </motion.div>
-
-          </div>
-        </section>
-
-        {/* ═══ GIỚI THIỆU ═══ */}
-        <section className="section border-t border-[#27272a]" id="about">
-          <div className="container">
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-start">
-              <motion.div
-                className="md:col-span-4"
-                initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}
-                variants={revealVariants}
-              >
-                <h2 className="text-sm font-mono uppercase tracking-widest text-accent mb-4">Giới thiệu</h2>
-                <div className="w-12 h-[1px] bg-accent/50 mb-8" />
-              </motion.div>
-
-              <motion.div
-                className="md:col-span-8"
-                initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}
-                variants={revealVariants}
-              >
-                <h3 className="text-3xl md:text-4xl font-semibold mb-8 leading-tight text-white" style={{ fontFamily: 'var(--font-outfit)' }}>
-                  PHP & Fullstack Developer với tư duy thiết kế hệ thống tối ưu.
-                </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 text-[#a1a1aa] text-base leading-relaxed">
-                  <p>
-                    Với hơn <strong>3 năm kinh nghiệm</strong> chuyên sâu về tùy chỉnh hệ thống CMS và phát triển backend bằng PHP/MySQL, tôi luôn cam kết mang đến những giải pháp kỹ thuật tối ưu, ổn định và có khả năng mở rộng.
-                  </p>
-                  <p>
-                    Kỹ năng đọc tài liệu tiếng Anh tốt giúp tôi nhanh chóng nắm bắt công nghệ mới (React, Next.js, Node.js), dễ dàng tích hợp và chuyển đổi linh hoạt giữa các kiến trúc monolithic truyền thống sang modern web stack.
-                  </p>
-                </div>
-              </motion.div>
+            <div className="pad relative grid min-h-[560px] items-center py-16 lg:py-20">
+              <Reveal className="relative z-10">
+                <h1 className="font-display text-[clamp(3rem,10vw,7.5rem)] font-normal leading-[0.98] tracking-[-0.035em]">
+                  <span className="block">Full-Stack</span>
+                  <span className="block text-blue">Developer &amp;</span>
+                  <span className="flex items-center gap-[0.2em]">
+                    more <Sparkle className="h-[0.45em] w-[0.45em] text-blue" />
+                  </span>
+                </h1>
+                <a href="#projects" className="btn-square btn-blue mt-10">
+                  Xem dự án <ArrowUpRight className="h-4 w-4 stroke-[1.5]" />
+                </a>
+              </Reveal>
             </div>
           </div>
-        </section>
 
-        {/* ═══ KỸ NĂNG ═══ */}
-        <section className="section bg-[#111111] border-y border-[#27272a]" id="skills">
-          <div className="container">
-            <motion.div
-              className="mb-12"
-              initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}
-              variants={revealVariants}
-            >
-              <h2 className="text-sm font-mono uppercase tracking-widest text-accent mb-4">Kỹ năng cốt lõi</h2>
-              <h3 className="text-3xl md:text-4xl font-semibold text-white" style={{ fontFamily: 'var(--font-outfit)' }}>Công nghệ & Công cụ</h3>
-            </motion.div>
-
-            {/* Asymmetric Bento Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-
-              {/* Frontend - Col Span 2 */}
-              <motion.div
-                className="md:col-span-2 bg-[#0a0a0a] border border-[#27272a] rounded-2xl p-8 relative overflow-hidden"
-                initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}
-                variants={{ ...revealVariants, visible: { ...revealVariants.visible, transition: { ...revealVariants.visible.transition, delay: 0 } } }}
-              >
-                <div className="absolute top-0 right-0 p-6 opacity-10">
-                  <span className="text-8xl font-mono text-accent">&lt;/&gt;</span>
-                </div>
-                <h3 className="text-xl font-medium text-white mb-6 relative z-10" style={{ fontFamily: 'var(--font-outfit)' }}>Frontend & UI</h3>
-                <div className="flex flex-wrap gap-3 relative z-10">
-                  {['JavaScript', 'HTML5', 'CSS3', 'Tailwind CSS', 'ReactJS', 'NextJS', 'Zustand'].map(skill => (
-                    <span key={skill} className="px-4 py-2 rounded-lg text-sm font-medium bg-[#111] text-[#ededed] border border-[#27272a] hover:border-accent hover:text-accent transition-colors">
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
-
-              {/* Backend - Col Span 1 */}
-              <motion.div
-                className="md:col-span-1 bg-[#0a0a0a] border border-[#27272a] rounded-2xl p-8 relative overflow-hidden"
-                initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}
-                variants={{ ...revealVariants, visible: { ...revealVariants.visible, transition: { ...revealVariants.visible.transition, delay: 0.1 } } }}
-              >
-                <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-accent/10 rounded-full blur-2xl" />
-                <h3 className="text-xl font-medium text-white mb-6 relative z-10" style={{ fontFamily: 'var(--font-outfit)' }}>Backend & DB</h3>
-                <div className="flex flex-wrap gap-3 relative z-10">
-                  {['PHP', 'NodeJS', 'MySQL', 'MongoDB', 'REST API', 'WordPress', 'Redis'].map(skill => (
-                    <span key={skill} className="px-4 py-2 rounded-lg text-sm font-medium bg-[#111] text-[#ededed] border border-[#27272a]">
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
-
-              {/* Tools & Workflow - Col Span 3 (Full width) */}
-              <motion.div
-                className="md:col-span-3 bg-gradient-to-r from-[#0a0a0a] to-[#111111] border border-[#27272a] rounded-2xl p-8 relative flex flex-col md:flex-row md:items-center justify-between gap-8"
-                initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}
-                variants={{ ...revealVariants, visible: { ...revealVariants.visible, transition: { ...revealVariants.visible.transition, delay: 0.2 } } }}
-              >
-                <div>
-                  <h3 className="text-xl font-medium text-white mb-3" style={{ fontFamily: 'var(--font-outfit)' }}>Công cụ & Quy trình</h3>
-                  <p className="text-[#a1a1aa] text-sm max-w-md leading-relaxed">
-                    Tận dụng sức mạnh của AI và các công cụ quản lý phiên bản để tăng tốc độ phát triển và đảm bảo chất lượng code.
-                  </p>
-                </div>
-                <div className="flex flex-wrap gap-3">
-                  {['Cursor', 'Antigravity', 'Claude', 'Figma', 'Postman', 'GitLab', 'GitHub'].map(tool => (
-                    <span key={tool} className="px-4 py-2 rounded-full text-xs font-mono font-medium bg-accent/10 text-accent border border-accent/20">
-                      {tool}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
+          {/* Portrait: in flow on mobile, overlapping the hero/intro divider on desktop */}
+          <Reveal
+            delay={0.15}
+            className="relative z-20 mx-auto w-[min(300px,72%)] pb-12 pt-2 lg:absolute lg:right-[8%] lg:top-[250px] lg:w-[330px] lg:p-0"
+          >
+            <div className="relative">
+              <div className="absolute inset-0 translate-x-6 translate-y-3 rotate-[7deg] rounded-[28px] bg-night" />
+              <Sparkle className="absolute -right-5 top-14 z-10 h-7 w-7 text-blue" />
+              <div className="relative -rotate-3 overflow-hidden rounded-[24px] bg-night shadow-[0_30px_60px_-30px_rgba(13,13,18,0.6)]">
+                <Image
+                  src={avatar}
+                  alt={`Chân dung ${profile.name}`}
+                  placeholder="blur"
+                  loading="eager"
+                  sizes="(min-width: 1024px) 330px, 72vw"
+                  className="aspect-[4/5] h-auto w-full object-cover"
+                />
+              </div>
+              <Scribble variant="orbit" className="absolute -bottom-14 -left-20 z-10 w-[150%] text-blue" />
             </div>
-          </div>
-        </section>
+          </Reveal>
 
-        {/* ═══ KINH NGHIỆM ═══ */}
-        <section className="section" id="experience">
-          <div className="container">
-            <motion.div
-              className="section-header"
-              initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}
-              variants={revealVariants}
-            >
-              <p className="eyebrow">Kinh nghiệm</p>
-              <h2 className="section-title">Hành trình sự nghiệp</h2>
-            </motion.div>
-            <motion.div
-              className="exp-timeline"
-              initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}
-              variants={revealVariants}
-            >
-              <div className="exp-item">
-                <h3>Cao đẳng Công Nghệ Thông Tin</h3>
-                <p className="exp-meta"> &middot; 2021 — 2023</p>
-                <ul className="exp-details">
-                  <li>GPA: 3.1</li>
-                </ul>
-              </div>
-              <div className="exp-item">
-                <h3>Đại học Công nghệ Thông tin (UIT)</h3>
-                <p className="exp-meta">Cử nhân Công nghệ thông tin &middot; 2024 — 2025</p>
-                <ul className="exp-details">
-                  <li>GPA: 3.2</li>
-                </ul>
-              </div>
-              <div className="exp-item">
-                <h3>MONA MEDIA</h3>
-                <p className="exp-meta">Junior PHP Developer &middot; 2023 — 2026</p>
-                <ul className="exp-details">
-                  <li>Phát triển các giải pháp thương mại điện tử, CMS và backend tùy chỉnh có khả năng mở rộng bằng PHP và MySQL.</li>
-                  <li>Gỡ lỗi hệ thống, hỗ trợ các thành viên nhóm và quản lý mã nguồn bằng Git.</li>
-                  <li>Chuyển đổi các bản thiết kế Figma thành giao diện người dùng động, đáp ứng bằng cách sử dụng Tailwind CSS, JavaScript và AJAX.</li>
-                  <li>Thiết kế logic nghiệp vụ, xây dựng API REST và tối ưu hóa hiệu suất hệ thống.</li>
-                  <li>Tối ưu hóa các truy vấn cơ sở dữ liệu, quản lý triển khai máy chủ và thực thi các biện pháp bảo mật hệ thống nghiêm ngặt.</li>
-                  <li>Sử dụng các công cụ AI để nâng cao hiệu quả phát triển.</li>
-                </ul>
-              </div>
+          <div id="about" className="pad relative overflow-hidden border-t border-line pb-16 pt-14 lg:pt-20">
+            <Spray className="-bottom-56 left-[18%] h-[440px] w-[600px]" />
+            <Reveal className="relative lg:max-w-[44rem]">
+              <p className="text-2xl uppercase tracking-tight text-muted md:text-3xl">
+                Xin chào, tôi là <span aria-hidden="true">👋</span>
+              </p>
+              <h2 className="mt-2 text-5xl font-medium tracking-tight md:text-7xl">{profile.name}</h2>
+              <p className="mt-10 text-xl font-light leading-[1.7] md:text-[1.7rem] md:leading-[1.65]">
+                Tôi là <span className="mark">PHP &amp; Fullstack Developer</span> với hơn{" "}
+                <span className="mark">3 năm kinh nghiệm</span> tùy chỉnh CMS và phát triển backend, hiện sống tại TP. Hồ
+                Chí Minh.
+              </p>
+              <p className="mt-6 max-w-[56ch] leading-relaxed text-muted">
+                Kỹ năng đọc tài liệu tiếng Anh tốt giúp tôi nhanh chóng làm chủ React, Next.js, Node.js và chuyển đổi
+                linh hoạt từ kiến trúc monolithic truyền thống sang modern web stack.
+              </p>
+            </Reveal>
 
-            </motion.div>
-          </div>
-        </section>
-
-        {/* ═══ DỰ ÁN ═══ */}
-        <section className="section bg-[#0a0a0a]" id="projects">
-          <div className="container">
-            <motion.div
-              className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12"
-              initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}
-              variants={revealVariants}
-            >
+            <div className="relative mt-12 flex flex-wrap items-end justify-between gap-8">
               <div>
-                <h2 className="text-sm font-mono uppercase tracking-widest text-accent mb-4">Dự án chọn lọc</h2>
-                <h3 className="text-3xl md:text-4xl font-semibold text-white" style={{ fontFamily: 'var(--font-outfit)' }}>Sản phẩm tiêu biểu</h3>
+                <p className="mb-3 text-sm">Kết nối với tôi</p>
+                <div className="flex gap-2">
+                  {socials.map((s, i) => (
+                    <a
+                      key={s.short}
+                      href={s.href}
+                      data-filled={i === 0}
+                      className="social-dot"
+                      aria-label={s.label}
+                      title={s.label}
+                      {...(s.href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                    >
+                      {s.short}
+                    </a>
+                  ))}
+                </div>
               </div>
-              <Link href="/projects" className="hidden md:inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-[#27272a] hover:border-accent hover:text-accent text-[#a1a1aa] font-medium transition-colors">
-                Xem tất cả <span>&rarr;</span>
+              <WavyBadge href="#contact" className="w-36 md:mr-[8%] md:w-40">
+                Sẵn sàng
+                <br />
+                hợp tác
+              </WavyBadge>
+            </div>
+          </div>
+        </section>
+
+        {/* ═══ STATS ═══ */}
+        <section aria-label="Thành tích" className="grid grid-cols-3 border-t border-line">
+          {STATS.map((s, i) => (
+            <Reveal key={s.label} delay={i * 0.08} className="px-2 py-10 text-center md:py-14">
+              <p className="text-4xl tracking-tight md:text-7xl">{s.value}</p>
+              <p className="mt-2 text-xs text-muted md:text-base">{s.label}</p>
+            </Reveal>
+          ))}
+        </section>
+
+        {/* ═══ SKILLS ═══ */}
+        <section id="skills" className="pad relative overflow-hidden border-t border-line py-16 md:py-24">
+          <Spray className="-bottom-44 -left-44 h-[420px] w-[420px]" />
+          <div className="relative flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+            <Reveal>
+              <h2 className="max-w-[13ch] text-4xl leading-[1.1] tracking-tight md:text-6xl">Giải pháp lập trình trọn gói.</h2>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <a href="#contact" className="btn-square btn-blue">
+                Hợp tác ngay <ArrowUpRight className="h-4 w-4 stroke-[1.5]" />
+              </a>
+            </Reveal>
+          </div>
+
+          <div className="relative mt-12 grid gap-5 md:grid-cols-3">
+            {SKILL_CARDS.map((card, i) => {
+              const tone = TONES[card.tone];
+              const Icon = card.icon;
+              return (
+                <Reveal key={card.title} delay={i * 0.08} className={`relative flex flex-col rounded-[28px] p-8 ${tone.card}`}>
+                  <Icon className={`h-10 w-10 stroke-[1.25] ${tone.icon}`} />
+                  <h3 className="mt-8 text-2xl leading-snug tracking-tight">{card.title}</h3>
+                  <p className={`mt-3 text-sm ${tone.sub}`}>{card.subtitle}</p>
+                  <ul className="mt-6 space-y-3 text-[0.95rem]">
+                    {card.items.map((item) => (
+                      <li key={item} className="flex items-center gap-3">
+                        <Check className="h-4 w-4 shrink-0 stroke-[1.5]" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                  <Link
+                    href="/projects"
+                    aria-label={`Xem dự án — ${card.title}`}
+                    className="mt-10 flex h-9 w-9 items-center justify-center self-end rounded-full bg-paper text-blue transition-transform duration-300 hover:-translate-y-0.5"
+                  >
+                    <ArrowUpRight className="h-4 w-4" />
+                  </Link>
+                </Reveal>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* ═══ PROJECTS ═══ */}
+        <section id="projects" className="border-t border-line">
+          <div className="pad flex flex-col gap-8 py-14 md:flex-row md:items-end md:justify-between md:py-16">
+            <Reveal>
+              <h2 className="text-4xl leading-[1.1] tracking-tight md:text-6xl">
+                Khám phá những
+                <br />
+                dự án tiêu biểu <LoopArrow className="ml-2 inline-block h-10 w-20 align-middle md:h-12 md:w-24" />
+              </h2>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <Link href="/projects" className="btn-square btn-blue">
+                Xem tất cả <ArrowUpRight className="h-4 w-4 stroke-[1.5]" />
               </Link>
-            </motion.div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {featuredProjects.map((project, idx) => (
-                <ProjectCard key={idx} project={project} index={idx} />
+            </Reveal>
+          </div>
+          {featured.map((project, i) => (
+            <FeaturedProject key={project.domain} project={project} index={i} />
+          ))}
+        </section>
+
+        {/* ═══ EXPERIENCE ═══ */}
+        <section id="experience" className="overflow-hidden bg-blue py-16 text-white md:py-24">
+          <div className="pad flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+            <Reveal>
+              <h2 className="text-4xl leading-[1.1] tracking-tight md:text-6xl">
+                Hành trình
+                <br />
+                sự nghiệp <LoopArrow className="ml-2 inline-block h-10 w-20 align-middle md:h-12 md:w-24" />
+              </h2>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <a href="#contact" className="btn-square btn-outline-light">
+                Hợp tác cùng tôi <ArrowUpRight className="h-4 w-4 stroke-[1.5]" />
+              </a>
+            </Reveal>
+          </div>
+
+          <div className="pad mt-12 grid gap-5 lg:grid-cols-2">
+            <Reveal className="rounded-[24px] bg-white/10 p-8 md:p-10 lg:row-span-2">
+              <p className="text-sm text-white/60">{WORK.period}</p>
+              <h3 className="mt-3 text-3xl tracking-tight">{WORK.title}</h3>
+              <p className="mt-1 text-white/70">{WORK.role}</p>
+              <ul className="mt-8 space-y-4">
+                {WORK.points.map((point) => (
+                  <li key={point} className="flex gap-3 leading-relaxed text-white/90">
+                    <Check className="mt-1 h-4 w-4 shrink-0 stroke-[1.5]" />
+                    {point}
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+            {EDUCATION.map((edu, i) => (
+              <Reveal key={edu.title} delay={0.08 * (i + 1)} className="flex flex-col rounded-[24px] bg-white/10 p-8 md:p-10">
+                <p className="text-sm text-white/60">{edu.period}</p>
+                <h3 className="mt-3 text-2xl tracking-tight">{edu.title}</h3>
+                <p className="mt-1 text-white/70">{edu.role}</p>
+                <p className="mt-auto pt-8 text-4xl tracking-tight">{edu.note}</p>
+              </Reveal>
+            ))}
+          </div>
+
+          {/* Client domains marquee (list duplicated for a seamless loop) */}
+          <div className="mt-16 overflow-hidden md:mt-20">
+            <p className="sr-only">Một số khách hàng: {clientHosts.join(", ")}</p>
+            <div className="marquee" aria-hidden="true">
+              {[...clientHosts, ...clientHosts].map((host, i) => (
+                <span key={i} className="flex items-center gap-10 pr-10 text-3xl tracking-tight md:text-5xl">
+                  <span className={i % 3 === 1 ? "text-white/40" : "text-white"}>{host}</span>
+                  <Sparkle className="h-4 w-4 text-white" />
+                </span>
               ))}
             </div>
-            <div className="mt-10 text-center md:hidden">
-              <Link href="/projects" className="inline-flex justify-center items-center gap-2 w-full px-6 py-3 rounded-full border border-[#27272a] hover:border-accent hover:text-accent text-[#a1a1aa] font-medium transition-colors">
-                Xem tất cả dự án <span>&rarr;</span>
-              </Link>
-            </div>
           </div>
         </section>
 
-        {/* ═══ LIÊN HỆ ═══ */}
-        <section className="section bg-[#0a0a0a] border-t border-[#27272a] pb-24" id="contact">
-          <div className="container grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-12">
-            <motion.div
-              className="contact-info max-w-lg"
-              initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}
-              variants={revealVariants}
-            >
-              <h2 className="text-sm font-mono uppercase tracking-widest text-accent mb-4">Liên hệ</h2>
-              <h3 className="text-3xl md:text-4xl font-semibold mb-6 text-white" style={{ fontFamily: 'var(--font-outfit)' }}>Hãy kết nối với tôi</h3>
-              <p className="text-[#a1a1aa] mb-12 leading-relaxed">
-                Bạn đang tìm kiếm một lập trình viên để hiện thực hóa ý tưởng của mình? Hãy để lại lời nhắn hoặc liên hệ trực tiếp, tôi sẽ phản hồi sớm nhất có thể.
+        {/* ═══ CONTACT ═══ */}
+        <section id="contact">
+          <div className="pad relative overflow-hidden py-16 text-center md:py-24">
+            <Scribble variant="coil" className="absolute -left-16 top-[40%] hidden w-72 rotate-[-55deg] text-blue md:block" />
+            <Scribble variant="coil" className="absolute -right-10 top-[58%] hidden w-72 text-blue md:block" />
+            <Reveal>
+              <h2 className="text-4xl font-medium leading-[1.1] tracking-tight md:text-7xl">
+                Bạn có ý tưởng?
+                <br />
+                Hãy cùng trò chuyện
+              </h2>
+            </Reveal>
+            <Reveal delay={0.1} className="mt-10 flex justify-center">
+              <WavyBadge href={`mailto:${profile.email}`} tone="ink" className="w-36 md:w-40">
+                Sẵn sàng
+                <br />
+                trò chuyện
+              </WavyBadge>
+            </Reveal>
+          </div>
+
+          <div className="grid border-t border-line lg:grid-cols-2">
+            <div className="pad py-12 md:py-16 lg:border-r lg:border-line">
+              <p className="max-w-[44ch] leading-relaxed text-muted">
+                Bạn đang tìm kiếm một lập trình viên để hiện thực hóa ý tưởng của mình? Hãy để lại lời nhắn hoặc liên hệ
+                trực tiếp, tôi sẽ phản hồi sớm nhất có thể.
               </p>
-
-              <div className="space-y-6">
-                <div className="flex items-center gap-4 group">
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-[#111] border border-[#27272a] text-accent group-hover:bg-accent/10 group-hover:border-accent/30 transition-all">
-                    <span className="text-xl">&#9993;</span>
-                  </div>
-                  <a href="mailto:baotrn.dev@gmail.com" className="text-lg font-medium text-[#ededed] hover:text-accent transition-colors">baotrn.dev@gmail.com</a>
-                </div>
-                <div className="flex items-center gap-4 group">
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-[#111] border border-[#27272a] text-accent group-hover:bg-accent/10 group-hover:border-accent/30 transition-all">
-                    <span className="text-xl">&#9742;</span>
-                  </div>
-                  <span className="text-lg font-medium text-[#ededed]">0774.858.314</span>
-                </div>
-                <div className="flex items-center gap-4 group">
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-[#111] border border-[#27272a] text-accent group-hover:bg-accent/10 group-hover:border-accent/30 transition-all">
-                    <span className="text-xl">&#9906;</span>
-                  </div>
-                  <span className="text-lg font-medium text-[#ededed]">TP. Hồ Chí Minh, Việt Nam</span>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              className="bg-[#111111] border border-[#27272a] rounded-2xl p-8 lg:p-10 shadow-2xl relative overflow-hidden"
-              initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}
-              variants={revealVariants}
-            >
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-accent to-accent2" />
-              <h3 className="text-2xl font-semibold mb-8 text-white" style={{ fontFamily: 'var(--font-outfit)' }}>Gửi tin nhắn</h3>
-              <form onSubmit={handleFormSubmit} className="space-y-5">
-                <div>
-                  <label htmlFor="name" className="block text-xs font-mono text-[#a1a1aa] mb-2 uppercase tracking-wider">Họ và tên</label>
-                  <input type="text" id="name" name="name" placeholder="Nguyễn Văn A" required disabled={formStatus !== "idle"}
-                    className="w-full bg-[#0a0a0a] border border-[#27272a] rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all placeholder:text-[#3f3f46]" />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block text-xs font-mono text-[#a1a1aa] mb-2 uppercase tracking-wider">Email</label>
-                  <input type="email" id="email" name="email" placeholder="example@company.com" required disabled={formStatus !== "idle"}
-                    className="w-full bg-[#0a0a0a] border border-[#27272a] rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all placeholder:text-[#3f3f46]" />
-                </div>
-                <div>
-                  <label htmlFor="msg" className="block text-xs font-mono text-[#a1a1aa] mb-2 uppercase tracking-wider">Tin nhắn</label>
-                  <textarea id="msg" name="message" placeholder="Mô tả dự án hoặc cơ hội bạn muốn trao đổi..." required disabled={formStatus !== "idle"} rows={4}
-                    className="w-full bg-[#0a0a0a] border border-[#27272a] rounded-lg px-4 py-3 text-white focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all resize-y placeholder:text-[#3f3f46]"></textarea>
-                </div>
-                <button
-                  type="submit"
-                  disabled={formStatus !== "idle" && formStatus !== "error"}
-                  className={`w-full py-4 rounded-lg font-medium transition-all active:scale-[0.98] shadow-[0_0_20px_rgba(0,112,243,0.3)] hover:shadow-[0_0_30px_rgba(0,112,243,0.5)] disabled:opacity-70 disabled:active:scale-100 ${
-                    formStatus === "error" ? "bg-red-500 hover:bg-red-600 text-white" : "bg-accent hover:bg-accent/90 text-white disabled:hover:bg-accent"
-                  }`}
-                >
-                  {formStatus === "idle" ? "Gửi tin nhắn" : 
-                   formStatus === "submitting" ? "Đang gửi..." : 
-                   formStatus === "success" ? "Đã gửi thành công!" : 
-                   "Có lỗi xảy ra. Thử lại!"}
-                </button>
-              </form>
-            </motion.div>
+              <ul className="mt-10 divide-y divide-line border-y border-line">
+                <li>
+                  <a href={`mailto:${profile.email}`} className="group flex items-center justify-between gap-4 py-5">
+                    <span className="flex items-center gap-4">
+                      <Mail className="h-5 w-5 stroke-[1.5] text-blue" />
+                      <span className="text-lg">{profile.email}</span>
+                    </span>
+                    <ArrowUpRight className="h-5 w-5 stroke-[1.5] transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                  </a>
+                </li>
+                <li>
+                  <a href={profile.phoneHref} className="group flex items-center justify-between gap-4 py-5">
+                    <span className="flex items-center gap-4">
+                      <Phone className="h-5 w-5 stroke-[1.5] text-blue" />
+                      <span className="text-lg">{profile.phone}</span>
+                    </span>
+                    <ArrowUpRight className="h-5 w-5 stroke-[1.5] transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                  </a>
+                </li>
+                <li className="flex items-center gap-4 py-5">
+                  <MapPin className="h-5 w-5 stroke-[1.5] text-blue" />
+                  <span className="text-lg">{profile.location}</span>
+                </li>
+              </ul>
+            </div>
+            <div className="pad border-t border-line py-12 md:py-16 lg:border-t-0">
+              <ContactForm />
+            </div>
           </div>
         </section>
       </main>
+
+      <SiteFooter />
     </>
   );
 }

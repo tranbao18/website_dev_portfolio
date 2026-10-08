@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { FilterCategory, filterOptions } from "@/data/projects";
 
 interface FilterBarProps {
@@ -11,28 +10,27 @@ interface FilterBarProps {
 
 export default function FilterBar({ activeFilter, onFilterChange, counts }: FilterBarProps) {
   return (
-    <div className="flex flex-wrap justify-center gap-3 w-full max-w-5xl mx-auto py-2">
-      {filterOptions.map((option) => {
-        const isActive = activeFilter === option.key;
+    <div className="flex flex-wrap gap-2.5" role="group" aria-label="Lọc dự án theo lĩnh vực">
+      {filterOptions
+        .filter((option) => counts[option.key] > 0)
+        .map((option) => {
+          const isActive = activeFilter === option.key;
 
-        return (
-          <button
-            key={option.key}
-            onClick={() => onFilterChange(option.key)}
-            className={`
-              relative px-5 py-2 rounded-full font-medium text-sm transition-all duration-300
-              border cursor-pointer
-              ${
-                isActive
-                  ? "bg-[var(--accent)] border-[var(--accent)] text-white shadow-[0_0_20px_rgba(0,112,243,0.3)]"
-                  : "bg-[#111] border-[#27272a] text-[#a1a1aa] hover:border-[var(--accent)] hover:text-[var(--accent)]"
-              }
-            `}
-          >
-            {option.label}
-          </button>
-        );
-      })}
+          return (
+            <button
+              key={option.key}
+              type="button"
+              onClick={() => onFilterChange(option.key)}
+              aria-pressed={isActive}
+              className={`cursor-pointer rounded-full border px-5 py-2 text-sm transition-colors duration-300 ${
+                isActive ? "border-blue bg-blue text-white" : "border-line text-ink hover:border-ink"
+              }`}
+            >
+              {option.label}
+              <sup className={`ml-1 text-[10px] ${isActive ? "text-white/70" : "text-muted"}`}>{counts[option.key]}</sup>
+            </button>
+          );
+        })}
     </div>
   );
 }
